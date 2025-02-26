@@ -1,0 +1,201 @@
+@import url("../public/public.css");
+
+main{
+    position: relative;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+main h1{
+    font-size: 50px;
+    font-family: Bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 50px;
+    border-bottom: 5px solid black;
+}
+/****************************************/
+.my-opinion-container{
+    text-align: left;
+    padding: 30px;
+}
+.discussion-book-title{
+    display: flex;
+}
+.discussion-book-title span{
+    font-family: Bold;
+    font-size: var(--font-size-xx-large);
+    margin-bottom: 10px;
+}
+.discussion-book-title span:first-child{
+    margin-right: 10px;
+}
+.discussion-book-title:first-child{
+    margin-right: 10px;
+}
+.discussion-title{
+    display: flex;
+    font-size: var(--font-size-large);
+    margin-bottom: 20px;
+}
+.discussion-title span{
+    margin-right: 10px;
+}
+.my-opinion{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 30px;
+    font-size: var(--font-size-small);
+    min-height: 300px;
+    box-sizing: border-box;
+}
+/*******************************/
+.my-opinion-chat{
+    padding: 30px 30px 0 30px;
+}
+.my-opinion-chat h3{
+    text-align: left;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: var(--font-size-normal);
+}
+.my-opinion-form{
+    display: flex;
+}
+.my-opinion-form label{
+    width: 100%;
+    padding-right: 10px;
+}
+.my-opinion-form textarea{
+    border-radius: 20px;
+    width: 100%;
+    height: 100px;
+    resize: none;
+    padding: 20px;
+    font-size: var(--font-size-small);
+}
+.my-opinion-chat button{
+    font-size: var(--font-size-x-small);
+    padding: 8px 10px;
+    width: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 20px;
+    background-color: #8f642f;
+    color: white;
+    transition-duration: 0.2s;
+}
+/*****************************************/
+.review-sort-container{
+    display: flex;
+    margin-left: auto;
+    margin-right: 30px;
+    margin-top: 50px;
+    text-align: right;
+    font-size: var(--font-size-xx-small);
+    padding-bottom: 15px;
+}
+.review-sort-container ul{
+    display: inline-flex;
+    list-style: none;
+    padding: 0 10px;
+}
+.review-sort-container li:not(:last-child)::after{
+    content: "|";
+    margin: 0 10px;
+}
+.review-sort-container a {
+    text-decoration: none;
+    color: black;
+}
+.review-sort-container a[active]{
+    font-weight: bold;
+}
+/*******************************************************/
+
+.all-discussion-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: none;
+    width: 100%;
+}
+.all-discussion-container header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-left: 30px;
+}
+
+.all-discussion-container .button-container button{
+    display: inline-block;
+    margin: 0 4px;
+    font-size: var(--font-size-x-small);
+    padding: 8px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    color: #512e02;
+}
+
+.all-discussion-container .button-container button[type=submit]{
+    transition-duration: 0.2s;
+    background-color: #ffe08a;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+.all-discussion-container .button-container button[type=button]{
+    background-color: transparent;
+}
+/******************************/
+
+.all-discussion{
+    display: flex;
+    flex-direction: column;
+}
+.one-discussion{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin: 30px 30px 0 30px;
+    padding: 20px;
+    border-top: 1px solid black;
+}
+.one-discussion:first-child {
+    margin-top: 0;
+}
+.one-discussion span{
+    font-size: var(--font-size-small);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.one-discussion p{
+    font-size: var(--font-size-small);
+    margin-bottom: 20px;
+}
+.agree-disagree-btn{
+    display: flex;
+    justify-content: right;
+}
+.agree-disagree-btn button{
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ffc946;
+    border: none;
+    color: #512e02;
+    transition-duration: 0.2s;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+.agree-disagree-btn button span{
+    font-size: var(--font-size-x-small);
+}
+.agree{
+    margin-right: 10px;
+}

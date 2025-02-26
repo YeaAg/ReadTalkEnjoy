@@ -1,0 +1,41 @@
+@import url("../public/public.css");
+
+body{
+    position: relative;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+img{
+    text-align: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+}
+
+p{
+    margin: 20px;
+}
+
+.jb-division-line {
+    border-top: 1px solid #444444;
+    margin: 30px auto;
+    width: 300px;
+}
+
+.menu-bar li{
+    background-color: #ffc946;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-bar a{
+    text-decoration: none;
+    color: black;
+}

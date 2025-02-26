@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}"
+>
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>나의 찜목록</title>
+	<link rel="stylesheet" href="../../static/css/content/wishlist.css" type="text/css">
+	<script src="../../static/js/user/cart.js" defer></script> <!-- ✅ JavaScript 연결 -->
+</head>
+<body>
+
+<main layout:fragment="main">
+	<h1>나의 찜 목록</h1>
+	<div class="category">
+		<span>찜한 권수:</span>
+		<b th:text="${cartCount} + '건'">13건</b>
+	</div>
+	<hr/>
+
+	<content1>
+		<div class="wishlist" id="wishlist-container">
+			<ul class="book-list">
+				<li th:each="wish : ${wishlist}" class="book-item">
+					<div class="book-card">
+						<a th:href="@{/book/{bookIsbn}(bookIsbn=${wish.book.isbn})}">
+							<img th:if="${wish.book != null}" th:src="${wish.book.getBase64Image()}" alt="책 이미지" class="book-image">
+						</a>
+						<div th:if="${wish.book != null}" class="book-info">
+							<h3 th:text="${wish.book.getTitle()}"></h3>
+							<p th:text="'가격: ' + ${wish.book.getPrice()} + '원'"></p>
+
+							<!-- ✅ 수정된 삭제 폼 -->
+							<form th:action="@{/user/wishlist/delete/{cartNo}(cartNo=${wish.no})}" method="post" class="delete-form">
+								<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+								<button type="submit" class="delete-button">삭제</button> <!-- ✅ submit 버튼 -->
+							</form>
+
+							<p class="cart-no" th:text="${wish.no}" style="display: none;"></p> <!-- ✅ 숨겨진 cartNo -->
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</content1>
+</main>
+
+</body>
+</html>

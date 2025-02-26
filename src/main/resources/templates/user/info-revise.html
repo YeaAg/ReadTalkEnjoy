@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/user/info-revise.css">
+	<script src="../../static/js/user/info-revise.js" defer></script>
+</head>
+<body>
+<main>
+	<h1>회원정보 수정</h1>
+	<form th:action="@{/user/info-revise}" method="post" th:object="${updateUser}">
+		<section class="user-info-revise-section">
+			<div class="nickname-revise-container">
+				<span>닉네임</span>
+				<label>
+					<input type="text" id="nickname" name="nickname" th:data="${#authentication.principal.nickname}">
+					<button type="button">중복검사</button>
+				</label>
+			</div>
+			<div class="password-revise-container">
+				<span>비밀번호</span>
+				<input type="password" id="password" name="password" placeholder="변경하는 경우만 입력하세요">
+			</div>
+			<div class="error-container">
+				<span>비밀번호 형식이 잘못되었습니다</span>
+			</div>
+			<div class="password-re-revise-container">
+				<span>비밀번호 재입력</span>
+				<input type="password" id="password-re">
+			</div>
+			<div class="error-container">
+				<span>비밀번호가 틀렸습니다</span>
+			</div>
+			<div class="email-revise-container">
+				<span>이메일</span>
+				<input type="text" id="email" name="email" th:data="${#authentication.principal.email}">
+			</div>
+			<div class="tel-revise-container">
+				<span>전화번호</span>
+				<input type="text" id="tel" name="tel" th:data="${#authentication.principal.tel}">
+			</div>
+		</section>
+		<section class="join-btn-section">
+			<button type="submit">수정</button>
+			<button type="button">취소</button>
+		</section>
+	</form>
+</main>
+</body>
+</html>

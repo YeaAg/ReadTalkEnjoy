@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/user/find-pw.css">
+</head>
+<body>
+    <main>
+        <h1>비밀번호 찾기</h1>
+        <form>
+            <section class="user-info-revise-section">
+                <div class="password-revise-container">
+                    <span>비밀번호</span>
+                    <input type="text" id="passward" name="passward">
+                </div>
+                <div class="pw-error-container">
+                    <span>비밀번호 형식이 잘못되었습니다</span>
+                </div>
+                <div class="password-re-revise-container">
+                    <span>비밀번호 재입력</span>
+                    <input type="text" id="passward-re" name="passward">
+                </div>
+                <div class="pw-re-error-container">
+                    <span>비밀번호가 틀렸습니다</span>
+                </div>
+            </section>
+            <section class="change-btn-section">
+                <button type="submit">바꾸기</button>
+            </section>
+        </form>
+    </main>
+</body>
+</html>

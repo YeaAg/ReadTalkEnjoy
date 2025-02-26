@@ -1,0 +1,445 @@
+@import url("../public/public.css");
+
+.book-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    margin: 30px auto;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.book-slide-container {
+    display: flex;
+    width: 500%; /* 전체 슬라이드 개수만큼 늘어나도록 설정 */
+    transition: transform 0.5s ease-in-out;
+}
+
+.book-slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-image img {
+    width: 200px; /* 기존 300px에서 줄임 */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.book-info {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+}
+
+.book-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.book-info p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* 화살표 버튼 스타일 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+body {
+    text-align: center;
+}
+
+/* 메인 콘텐츠 관련 스타일 */
+.books {
+    padding: 50px;
+    text-align: center;
+    align-items: center;
+}
+
+.book-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* 🔽 책 상세 설명 스타일 (말줄임 처리) */
+.book-detail {
+    font-size: 16px;
+    max-height: 120px; /* 최대 높이 설정 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    text-overflow: ellipsis; /* 말줄임 적용 */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* 최대 줄 수 (5줄까지만 표시) */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    white-space: normal;
+    text-align: justify;
+}
+
+.book {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px;
+}
+
+.box {
+    background-color: #dddddd;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    overflow: hidden;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column; /* 컨텐츠와 버튼을 분리 */
+    justify-content: space-between; /* 상단 내용과 하단 버튼 사이 여백 유지 */
+    min-height: 400px; /* 컨텐츠가 적을 때도 버튼이 하단에 고정됨 */
+}
+
+/* 🔽 버튼을 감싸는 컨테이너 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto; /* 버튼을 컨테이너 하단으로 배치 */
+}
+
+/* 🔽 버튼 스타일 */
+.book button {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: #007BFF;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.book button:hover {
+    background-color: gray;
+}
+
+.book hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+.books {
+    padding: 50px;
+}
+
+/* 🔽 사용자 ID 스타일 */
+.discussion-id {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px; /* 아래 여백 추가 */
+}
+
+/* 🔽 토론 주제 스타일 */
+.discussion-topic {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px; /* 주제와 내용 사이 여백 추가 */
+}
+
+/* 🔽 토론 내용 스타일 (말줄임 적용) */
+.discussion-content {
+    font-size: 16px;
+    max-height: 80px; /* 최대 높이 설정 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    text-overflow: ellipsis; /* 말줄임 적용 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 3줄까지만 표시 */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    white-space: normal;
+    text-align: center;
+}
+
+@import url("../public/public.css");
+
+.book-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 80%;
+    margin: 30px auto;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.book-slide-container {
+    display: flex;
+    width: 500%; /* 전체 슬라이드 개수만큼 늘어나도록 설정 */
+    transition: transform 0.5s ease-in-out;
+}
+
+.book-slide {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-image img {
+    width: 200px; /* 기존 300px에서 줄임 */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.book-info {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+}
+
+.book-info h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.book-info p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+/* 화살표 버튼 스타일 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+body {
+    text-align: center;
+}
+
+/* 메인 콘텐츠 관련 스타일 */
+.books {
+    padding: 50px;
+    text-align: center;
+    align-items: center;
+}
+
+.book-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* 🔽 책 상세 설명 스타일 (말줄임 처리) */
+.book-detail {
+    font-size: 16px;
+    max-height: 120px; /* 최대 높이 설정 */
+    overflow: hidden; /* 넘치는 내용 숨김 */
+    text-overflow: ellipsis; /* 말줄임 적용 */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* 최대 줄 수 (5줄까지만 표시) */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    white-space: normal;
+    text-align: justify;
+}
+
+.book {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 50px;
+}
+
+.box {
+    background-color: #dddddd;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+    overflow: hidden;
+    word-break: break-word;
+    display: flex;
+    flex-direction: column; /* 컨텐츠와 버튼을 분리 */
+    justify-content: space-between; /* 상단 내용과 하단 버튼 사이 여백 유지 */
+    min-height: 400px; /* 컨텐츠가 적을 때도 버튼이 하단에 고정됨 */
+}
+
+/* 🔽 버튼을 감싸는 컨테이너 */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto; /* 버튼을 컨테이너 하단으로 배치 */
+}
+
+/* 🔽 버튼 스타일 */
+.book button {
+    width: 100%;
+    max-width: 200px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: #007BFF;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.book button:hover {
+    background-color: gray;
+}
+
+.book hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+.books {
+    padding: 50px;
+}
+
+/* 📌 사용자 ID 스타일 */
+.comment-id {
+    font-size: 22px;
+    font-weight: bold;
+    color: #222; /* 진한 글씨 */
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+/* 📌 토론 내용 스타일 */
+.comment-content {
+    font-size: 16px;
+    max-height: 80px; /* 최대 높이 제한 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 최대 3줄까지만 표시 */
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    white-space: normal;
+    text-align: justify;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* 📌 좋아요 숫자 강조 */
+.comment-like {
+    font-size: 20px;
+    font-weight: bold;
+    color: #e74c3c; /* 붉은색으로 강조 */
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.discussions li {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.discussions .image-container {
+    width: 200px;
+    text-align: center;
+}
+
+.discussions img {
+    width: 100%;
+    height: auto;
+}
+
+.discussions p {
+    flex: 1;
+    font-size: 18px;
+}
+
+.books h2 {
+    font-size: 40px;
+}
+
+
+.discussions li {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+}
+
+.discussions .image-container {
+    width: 200px;
+    text-align: center;
+}
+
+.discussions img {
+    width: 100%;
+    height: auto;
+}
+
+.discussions p {
+    flex: 1;
+    font-size: 18px;
+}
+
+.books h2 {
+    font-size: 40px;
+}

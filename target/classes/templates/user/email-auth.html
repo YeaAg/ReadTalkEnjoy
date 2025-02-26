@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/user/email-auth.css">
+</head>
+<body>
+    <main>
+        <h1 th:text="${title}">아이디 찾기</h1>
+        <form>
+            <section class="user-info-revise-section">
+                <div class="email-cert-container">
+                    <span>이메일 인증</span>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="error-container">
+                    <span>존재하지 않는 이메일입니다</span>
+                </div>
+                <div class="email-cert-number-input-container" th:classappend="${showCertInput} ? '' : 'hide-input'">
+                    <span>인증번호를 입력</span>
+                    <input type="text" id="email-number-input" name="email-number-input">
+                    <button>인증</button>
+                </div>
+            </section>
+            <section class="find-btn-section">
+                <button type="submit">인증</button>
+            </section>
+        </form>
+    </main>
+</body>
+</html>

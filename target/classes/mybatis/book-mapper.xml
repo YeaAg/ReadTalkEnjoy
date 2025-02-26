@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.BookMapper">
+    <resultMap id="bookWithImageMap" type="BookDTO" autoMapping="true">
+        <id property="isbn" column="isbn" />
+        <collection property="bookImages" ofType="BookImageDTO" javaType="list">
+            <id property="no" column="no"/>
+        </collection>
+    </resultMap>
+    <!-- 모든 책 리스트 -->
+    <select id="getAllBooks" resultType="BookDTO">
+        SELECT * FROM book
+    </select>
+    <!-- 제목으로 책 검색 -->
+    <select id="searchBooksByNameWithCount" resultType="com.project.dto.BookDTO">
+        SELECT b.*
+        FROM book b
+        WHERE REGEXP_REPLACE(title, '[^a-zA-Z0-9가-힣]', '')
+        LIKE CONCAT('%', REGEXP_REPLACE(#{title}, '[^a-zA-Z0-9가-힣]', ''), '%')
+        <if test="pageInfo.sort != null">
+            ORDER BY
+            <choose>
+                <when test="pageInfo.sort == 'recent'">b.publication_date DESC</when>
+                <when test="pageInfo.sort == 'title'">b.title ASC</when>
+                <otherwise>b.isbn</otherwise>
+            </choose>
+        </if>
+        LIMIT #{pageInfo.size} OFFSET #{pageInfo.offset}
+
+    </select>
+    <!-- isbn 으로 책 조회 -->
+    <select id="getBookByIsbn" resultType="BookDTO" resultMap="bookWithImageMap">
+        SELECT b.*, bi.no
+        FROM book b
+                 LEFT OUTER JOIN book_image bi ON b.isbn = bi.book_isbn
+        WHERE b.isbn = #{isbn}
+    </select>
+    <!-- 평균 평점이 가장 높은 책 반환 -->
+    <select id="getPopularBook" resultType="BookDTO">
+        SELECT b.*
+        FROM book b
+                 JOIN review r ON b.isbn = r.book_isbn
+        GROUP BY b.isbn
+        ORDER BY AVG(r.rate) DESC
+        LIMIT 1
+    </select>
+    <!-- 특정 책의 토론 주제 개수 조회 -->
+    <select id="getDiscussionCountByBookIsbn" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM discussion
+        WHERE book_isbn = #{isbn}
+    </select>
+    <!-- 특정 책의 토론 참여자 인원수 조회 -->
+    <select id="getParticipantCountByBookIsbn" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT dc.user_id) AS participantCount
+        FROM discussion d
+                 JOIN discussion_comment dc ON d.id = dc.discussion_id
+        WHERE d.book_isbn = #{isbn}
+    </select>
+    <!-- 책 리뷰 조회 -->
+    <select id="selectPaginatedReviewsByBookIsbn" resultType="ReviewDTO">
+        SELECT REVIEW.*, USER.profile_image
+        FROM review REVIEW
+        JOIN user USER ON REVIEW.user_id = USER.id
+        WHERE book_isbn = #{isbn}
+        <choose>
+            <when test="pageInfo.sort == 'low-rate'">
+                ORDER BY REVIEW.rate
+            </when>
+            <when test="pageInfo.sort == 'high-rate'">
+                ORDER BY REVIEW.rate DESC
+            </when>
+                    <otherwise>
+                        ORDER BY REVIEW.updated_at DESC
+                    </otherwise>
+        </choose>
+        LIMIT #{pageInfo.size} OFFSET #{pageInfo.offset}
+    </select>
+    <!-- 리뷰 관련 쿼리(개수, 평균 등) -->
+    <select id="selectPaginatedReviewTotalCountByIsbn" resultType="java.util.Map">
+        SELECT
+            IFNULL(rate, 'result') AS 'rate',
+            COUNT(rate) 'count',
+            AVG(rate) AS 'avg'
+        FROM review WHERE book_isbn = #{isbn}
+        GROUP BY rate with rollup
+    </select>
+    <!-- 책의 총 개수 -->
+    <select id="selectPaginatedBooksTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM book
+    </select>
+    <!-- 책 조회할 때의 pagination -->
+    <select id="getPaginatedBooks" resultType="BookDTO">
+        SELECT *
+        FROM book b
+        <choose>
+            <when test="pageInfo.sort == 'recent'">
+                ORDER BY b.publication_date DESC
+            </when>
+            <when test="pageInfo.sort == 'title'">
+                ORDER BY b.title ASC
+            </when>
+        </choose>
+        LIMIT #{pageInfo.size} OFFSET #{pageInfo.offset}
+    </select>
+    <!-- 평균 평점이 가장 높은 책 5권 반환 -->
+    <select id="getPopularBook5" resultType="BookDTO">
+        SELECT b.*
+        FROM book b
+                 JOIN review r ON b.isbn = r.book_isbn
+        GROUP BY b.isbn
+        ORDER BY AVG(r.rate) DESC
+        LIMIT 5
+    </select>
+    <!-- 평균 평점이 가장 높은 책 2권 반환 -->
+    <select id="getPopularBook2" resultType="BookDTO">
+        SELECT b.*
+        FROM book b
+                 JOIN review r ON b.isbn = r.book_isbn
+        GROUP BY b.isbn
+        ORDER BY AVG(r.rate) DESC
+        LIMIT 2
+    </select>
+    <!-- 유저 카트 조회 -->
+    <select id="selectCartsByUser" resultMap="cartResultMap">
+        SELECT *
+        FROM `select_carts_by_user_view`
+        WHERE `user_id` = #{id}
+    </select>
+    <resultMap id="cartResultMap" type="CartDTO">
+        <!-- CartDTO 매핑 -->
+        <result property="no" column="cart_no"/>
+        <association property="book" javaType="BookDTO">
+            <!-- BookDTO 매핑 -->
+            <result property="isbn" column="book_isbn"/>
+            <result property="title" column="book_title"/>
+            <result property="price" column="book_price"/>
+            <result property="image" column="book_image"/>
+        </association>
+    </resultMap>
+    <!-- 카트에 책 추가 -->
+    <insert id="insertBookToCart" useGeneratedKeys="true" keyProperty="cart.no">
+        INSERT INTO cart (no, user_id, book_isbn)
+        VALUES (NULL, #{user.id}, #{cart.book.isbn})
+    </insert>
+    <!-- 카트에서 특정 책 삭제 -->
+    <delete id="deleteBookFromCart">
+        DELETE FROM `cart` WHERE `no` = #{cartNo}
+    </delete>
+    <!-- viewer -->
+    <select id="getImageByIsbn" resultType="BookImageDTO">
+        SELECT * FROM book_image WHERE book_isbn = #{isbn}
+    </select>
+    <!-- 홈 화면 베트트셀러 5 -->
+    <select id="getASCBestseller" resultType="BookDTO">
+        SELECT * FROM book ORDER BY book.isbn LIMIT 5
+    </select>
+    <!-- 홈화면 베스트셀러 2 -->
+    <select id="getDESCBestseller" resultType="BookDTO">
+        SELECT * FROM book ORDER BY book.isbn DESC LIMIT 2
+    </select>
+    <!-- 유저 카트 개수 조회 -->
+    <select id="selectCartCountByUser" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM cart WHERE user_id = #{userId}
+    </select>
+    <!-- 책 카테고리 조회 -->
+    <select id="selectCategoryByIsbn" resultType="CategoryDTO">
+        WITH RECURSIVE CategoryHierarchy AS (
+            SELECT
+                c.no,
+                c.name,
+                c.parent,
+                c.level
+            FROM
+                category c
+                    JOIN
+                project.book b ON c.no = b.category
+            WHERE
+                b.isbn = #{isbn}
+
+            UNION ALL
+
+            SELECT
+                c.no,
+                c.name,
+                c.parent,
+                c.level
+            FROM
+                category c
+                    JOIN
+                CategoryHierarchy ch ON c.no = ch.parent
+        )
+        SELECT *
+        FROM CategoryHierarchy
+        ORDER BY level;
+    </select>
+    <!-- 사용자 리뷰 추가 -->
+    <insert id="insertReview">
+        INSERT INTO review (user_id, book_isbn, content, `like`, rate, updated_at, user_image)
+        VALUES (#{userId}, #{isbn}, #{content}, 0, #{rate}, DEFAULT,
+                (SELECT profile_image FROM user WHERE id = #{userId})
+               );
+    </insert>
+    <select id="getTotalBookCountByTitle" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM book
+        WHERE REGEXP_REPLACE(title, '[^a-zA-Z0-9가-힣]', '')
+                  LIKE CONCAT('%', REGEXP_REPLACE(#{title}, '[^a-zA-Z0-9가-힣]', ''), '%')
+    </select>
+    <!-- 리뷰 좋아요 추가 -->
+    <update id="plusReviewLike">
+        UPDATE review
+        SET `like` = `like` + 1
+        WHERE book_isbn = #{bookIsbn}
+          AND content = #{content}
+          AND user_id = #{userId}
+    </update>
+</mapper>

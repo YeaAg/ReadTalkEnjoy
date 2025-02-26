@@ -1,0 +1,349 @@
+@import url("../public/public.css");
+
+main{
+    position: relative;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+main h1{
+    font-size: 50px;
+    font-family: Bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 50px;
+    border-bottom: 5px solid black;
+}
+/***********************************************/
+.book-title-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.book-title-search span{
+    font-size: var(--font-size-normal);
+    margin-right: 10px;
+}
+.book-title-search label{
+    padding: 7px 15px;
+    width: 600px;
+    border-radius: 30px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.book-title-search input{
+    font-size: var(--font-size-normal);
+    text-align: left;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+.book-title-search input:focus {
+    border: none;
+}
+.book-title-search button{
+    background-color: transparent;
+    border: none;
+    font-size: var(--font-size-normal);
+    cursor: pointer;
+}
+/***********************************/
+main > header{
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-x-small);
+    margin: 25px 100px;
+    color: var(--Dark-gray-textured-background---4-rgba);
+}
+main > header li{
+    display: inline-block;
+    list-style: none;
+}
+main > header li:not(:last-child)::after{
+    content: "|";
+    margin: 0 10px;
+}
+main > header a{
+    text-decoration: none;
+    color: var(--Dark-gray-textured-background---4-rgba);
+}
+#view-size-select{
+    font-size: var(--font-size-xx-small);
+    padding: 3px;
+}
+/***********************************************/
+.book-title-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    /*border-top: 5px solid black;*/
+}
+.book-title-search span{
+    font-size: var(--font-size-normal);
+    margin-right: 10px;
+}
+.book-title-search select{
+    font-size: var(--font-size-small);
+    padding: 5px 10px;
+    width: 500px;
+    max-width: 500px;
+}
+/*****************************************************/
+.one-book-discussion{
+    display: flex;
+    border-top: 2px solid var(--Dark-gray-textured-background---2-rgba);
+}
+
+.image-container{
+    width: 450px;
+    display: flex;
+    padding: 50px 0 50px 50px;
+}
+.image-container img{
+    width: 70%;
+    height: auto;
+}
+.discussion-title-recent{
+    margin: 50px 40px 50px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: left;
+}
+.discussion-title-recent h2{
+    font-size: var(--font-size-large);
+    margin-bottom: 20px;
+}
+.discussion-title-recent h2 a{
+    text-decoration: none;
+    color: inherit;
+}
+.discussion-title{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.discussion-title span{
+    font-size: var(--font-size-normal);
+    margin-right: 10px;
+}
+.discussion-title p{
+    font-size: var(--font-size-normal);
+    margin-right: 10px;
+}
+.discussion-recent{
+    /*display: flex;*/
+    box-sizing: border-box;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
+    width: 100%;
+    height: 120px;
+    margin-bottom: 20px;
+    padding: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    overflow-y: scroll;
+}
+.discussion-recent::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+.discussion-recent p{
+    margin: 0;
+    font-size: var(--font-size-small);
+    line-height: 30px;
+}
+.discussion-button-section{
+    display: flex;
+    justify-content: right;
+    border: none;
+}
+.discussion-button-section a{
+    text-decoration: none;
+    color: inherit;
+}
+.discussion-button{
+    font-size: var(--font-size-small);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ffc946;
+    border: none;
+    color: #512e02;
+    transition-duration: 0.2s;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+.book-button{
+    font-size: var(--font-size-small);
+    padding: 10px 20px;
+    margin-left: 10px;
+    /*margin-right: 10px;*/
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ffe08a;
+    border: none;
+    color: #512e02;
+    transition-duration: 0.2s;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+.all-book-discussion{
+    border-bottom: 2px solid black;
+    margin: 0 100px;
+}
+/**********************************************/
+
+.my-opinion-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    padding: 40px 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 99;
+}
+
+.my-opinion-form {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 700px;
+    /*height: 500px;*/
+    padding: 60px 60px 30px 60px;
+    transform: translateX(-50%);
+    background-color: beige;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 50px;
+    border: none;
+    text-align: center;
+}
+.my-opinion-form > h3{
+    font-size: var(--font-size-normal);
+    text-align: center;
+    margin-bottom: 15px;
+}
+.my-opinion-subject{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: var(--font-size-small);
+}
+.my-opinion-subject span{
+    margin-right: 10px;
+    font-family: Medium;
+}
+.my-opinion-form select{
+    padding: 5px 10px;
+    font-size: var(--font-size-small);
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+}
+
+.my-opinion-form textarea{
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 20px;
+    margin-top: 20px;
+    font-size: var(--font-size-small);
+}
+.my-opinion-form .button-container {
+    margin: 20px 0 20px 70px;
+    text-align: center;
+}
+.my-opinion-form .button-container button{
+    display: inline-block;
+    margin: 0 4px;
+    font-size: var(--font-size-x-small);
+    padding: 8px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    color: #512e02;
+}
+
+.my-opinion-form .button-container button[type=submit]{
+    transition-duration: 0.2s;
+    background-color: #ffe08a;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+.my-opinion-form .button-container button[type=button]{
+    background-color: transparent;
+}
+/*******************************/
+.discussion-write-button-container{
+    display: flex;
+    width: 1200px;
+    justify-content: right;
+}
+.discussion-write-button{
+    text-decoration: none; /* 밑줄 제거 */
+    margin-right: 100px;
+    margin-top: 20px;
+    font-size: var(--font-size-small);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    background-color: #ffc946;
+    border: none;
+    color: #512e02;
+    transition-duration: 0.2s;
+    &:hover{
+        background-color: #8f642f;
+        color: white;
+    }
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 50px 0;
+}
+
+.pagination li {
+    margin: 0 8px;
+}
+
+.pagination a {
+    text-decoration: none;
+    color: black;
+    font-size: var(--font-size-x-small);
+    font-weight: normal;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .active {
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+}

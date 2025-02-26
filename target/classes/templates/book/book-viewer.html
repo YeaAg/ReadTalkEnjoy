@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/book/book-viewer.css">
+	<script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+	<script src="../../static/js/book/book-viewer.js" defer></script>
+</head>
+<body>
+<main layout:fragment="main">
+	<section class="viewer-container">
+		<div id="bookImages">
+			<div id="bookMainPageContainer">
+				<img th:src="${book.base64Image}" alt="메인이미지">
+			</div>
+			<div id="bookImagesContainer">
+				<div th:each="image: ${book.bookImages}">
+					<img th:src="@{|/image/${image.no}|}" alt="책 이미지">
+				</div>
+			</div>
+		</div>
+		<div class="viewer-button">
+			<button id="prevPage"><i class="bi bi-chevron-left"></i></button>
+			<button id="nextPage"><i class="bi bi-chevron-right"></i></button>
+		</div>
+	</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,169 @@
+@import url("../public/public.css");
+
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+/* 헤더 내부 컨텐츠 정렬 */
+.header-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+}
+
+/* 로고 (왼쪽 정렬) */
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* 네비게이션 메뉴 (가운데 정렬) */
+.menu-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* 네비게이션 항목 간 간격을 넓게 조정 */
+.menu-bar {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 80px; /* 기존보다 더 넓게 배치 */
+}
+
+/* 네비게이션 개별 항목 */
+.menu-bar > li {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.menu-bar > li > a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.menu-bar > li > a:hover {
+    color: #007BFF;
+}
+
+/* 로그인 & 회원가입 버튼 (오른쪽 정렬) */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 우측 정렬 */
+    flex-shrink: 0;
+}
+
+.auth-buttons div {
+    display: flex;
+    gap: 10px;
+}
+
+/* 버튼 크기 조정 */
+.login-button, .signup-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover, .signup-button:hover {
+    background-color: #0056b3;
+}
+
+/* 본문이 헤더 아래로 가리지 않도록 여백 추가 */
+body {
+    padding-top: 90px;
+}
+
+/* 반응형 대응 */
+@media (max-width: 1024px) {
+    .menu-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .menu-bar {
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .menu-bar > li > a {
+        font-size: 16px;
+    }
+
+    .auth-buttons {
+        justify-content: flex-end;
+    }
+
+    .login-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        padding: 10px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .menu-bar {
+        flex-direction: column;
+    }
+
+    .menu-bar > li {
+        padding: 5px 10px;
+    }
+
+    .auth-buttons {
+        flex-direction: column;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .login-button, .signup-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}

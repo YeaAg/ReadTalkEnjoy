@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/book/book.css">
+	<script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="../../static/js/book/book.js" defer></script>
+</head>
+<body>
+<main layout:fragment="main">
+	<nav id="category-nav">
+		<ol>
+			<li th:each="category: ${categories}">
+				<a th:text="${category.name}">CATEGORY1</a>
+			</li>
+		</ol>
+	</nav>
+	<h1 th:text="${book.title}">소년이 온다</h1>
+	<h2 th:text="|${book.author} / ${book.publisher}|">한강 / 창비</h2>
+	<article>
+		<section>
+			<div class="main-image-container">
+				<img th:src="${book.base64Image}" src="../../static/images/book_main.jpg" alt="메인이미지"/>
+			</div>
+		</section>
+
+		<form method="post" name="book" th:id="${book.isbn}">
+			<div class="summary-info-discussion">
+				<div class="discussion-summary">
+					<div>
+						<span class="participant">토론 참여자</span><br>
+						<span class="count" th:text="|${bookParticipantCount}명|">10명</span><br>
+						<span class="topics" th:text="|${bookDiscussionCount}개의 주제|">(2개의 주제)</span>
+					</div>
+				</div>
+			</div>
+			<div class="book-price">
+				<span>가격: </span>
+				<span th:text="${#numbers.formatCurrency(book.price)}">10000</span>
+				<!--                    <span>원</span>-->
+			</div>
+			<div class="loan-info">
+				<div class="available-loan">
+					<b>대출 가능 여부:</b>
+					<span th:text="${book.copiesAvailable} == 0 ? '불가' : '대출 가능'">불가</span>
+				</div>
+				<div class="available-book">
+					<b>대출:</b>
+					<div>
+						<span th:text="${book.copiesAvailable}"></span>
+						<span>/</span>
+						<span>50</span>
+					</div>
+				</div>
+				<div class="available-date">
+					<b>대출 가능일:</b>
+					<!--                        <span th:text="${loan.returnDate}">2025-02-17</span>-->
+					<span th:if="${book.copiesAvailable == 0}" th:text="${formattedDate}"></span>
+					<!--					<span th:text="${firstReturnDate}">2025-02-17</span>-->
+				</div>
+			</div>
+
+			<div class="login-to-loan" sec:authorize="isAnonymous()">
+				<span><a href="/user/login">로그인</a></span>
+				<b>후 대출을 해보세요</b>
+			</div>
+
+			<button type="button" class="discussion-btn">토론하러 가기</button>
+			<button type="button" class="heart-btn">
+				<i class="bi bi-heart-fill"></i>
+				찜하기
+			</button>
+			<button type="button" class="loan-btn">대출하기</button>
+		</form>
+	</article>
+
+	<nav id="book-info-navigator">
+		<ul>
+			<li>
+				<a href="#book-info-section">
+					<i class="bi bi-dash-lg"></i>
+					<span>줄거리</span>
+				</a>
+			</li>
+			<li>
+				<a href="#book-help-section">
+					<i class="bi bi-dash-lg"></i>
+					<span>정보</span>
+				</a>
+			</li>
+			<li>
+				<a href="#review-form">
+					<i class="bi bi-dash-lg"></i>
+					<span>리뷰</span>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<section id="book-info-section">
+		<div class="book-img-container">
+			<h4>말라파르테 문학상, 만해문학상 수상작 <br>
+				우리 시대의 소설 『소년이 온다』
+			</h4>
+			<p th:text="${book.detail}">
+				2014년 만해문학상, 2017년 이탈리아 말라파르테 문학상을 수상하고 전세계 20여개국에 번역 출간되며 세계를 사로잡은 우리 시대의 소설 『소년이 온다』. <br>
+				이 작품은 『채식주의자』로 인터내셔널 부커상을 수상한 한강 작가에게 “눈을 뗄 수 없는, 보편적이며 깊은 울림”(뉴욕타임즈), “역사와 인간의 본질을 다룬 충격적이고 도발적인 소설”(가디언), “한강을 뛰어넘은 한강의 소설”(문학평론가 신형철)이라는 찬사를 선사한 작품으로, 그간 많은 독자들에게 광주의 상처를 깨우치고 함께 아파하는 문학적인 헌사로 높은 관심과 찬사를 받아왔다.
+				<br>
+				『소년이 온다』는 ‘상처의 구조에 대한 투시와 천착의 서사’를 통해 한강만이 풀어낼 수 있는 방식으로 1980년 5월을 새롭게 조명하며, 무고한 영혼들의 말을 대신 전하는 듯한 진심 어린 문장들로 5·18 이후를 살고 있는 우리에게 묵직한 질문을 던진다.
+				<br>
+				이 작품은 가장 한국적인 서사로 세계를 사로잡은 한강 문학의 지향점을 보여준다. 인간의 잔혹함과 위대함을 동시에 증언하는 이 충일한 서사는 이렇듯 시공간의 한계를 넘어 인간 역사의 보편성을 보여주며 훼손되지 말아야 할 인간성을 절박하게 복원한다.
+				<br>
+				<br>
+				저자는 이 작품에서 진심 어린 문장들로 무고한 영혼의 말을 대신 전하며 그 시절을 잊고 무심하게 살아가는 우리에게 묵직한 메시지를 던진다. 국가의 무자비함을 생생하게 그려내 지금까지도 우리나라뿐 아니라 전 세계에서 계속되고 있는 인간의 잔혹함과 악행에 대한 근원적인 질문을 던지고, 잊을 수 없는 봄날의 오월을 지나 여름을 건너가지 못한 이들과 살아남은 것이 오히려 치욕으로 여기며 매일을 힘겹게 견뎌내는 이들에게 우리가 어떤 대답을 해줄 수 있는 가를 간절한 목소리로 묻는다. 그리하여 우리가 붙들어야 할 역사적 기억이 무엇인지 생각하게 한다.
+			</p>
+		</div>
+	</section>
+
+	<section id="book-help-section">
+		<div>
+			<h4>기본 정보</h4>
+			<div class="isbn">
+				<b>ISBN</b>
+				<span th:text="${book.isbn}">9788936434120</span><br>
+			</div>
+			<div class="release-date">
+				<b>발행(출시)일자</b>
+				<span th:text="${book.publicationDate}">2014년 05월 19일</span><br>
+			</div>
+			<div class="pages">
+				<b>쪽수</b>
+				<span th:text="${book.pageCount}">216쪽</span>
+			</div>
+		</div>
+	</section>
+	<section id="review-form">
+		<div class="my-opinion-chat">
+			<h3>리뷰 작성하기</h3>
+			<form method="post" class="my-opinion-form">
+				<label>
+					<textarea name="text" placeholder="리뷰를 작성해주세요..."></textarea>
+				</label>
+				<button type="submit">작성하기</button>
+
+				<!-- ⭐ 별점 선택 UI -->
+				<div class="rating-container">
+					<span class="rating-label">별점 선택:</span>
+					<div class="star-rating">
+						<i class="fa-regular fa-star" data-value="1"></i>
+						<i class="fa-regular fa-star" data-value="2"></i>
+						<i class="fa-regular fa-star" data-value="3"></i>
+						<i class="fa-regular fa-star" data-value="4"></i>
+						<i class="fa-regular fa-star" data-value="5"></i>
+					</div>
+					<input type="hidden" name="rate" id="rating-value" value="0">
+				</div>
+			</form>
+		</div>
+		<div class="review-score-container">
+			<section class="review-score-section">
+				<div class="review-total-count-container">
+					<span>리뷰 총 </span><span class="review-total-count">13,712</span><span> 건</span>
+				</div>
+
+				<div class="review-total-score-container">
+					<span class="review-total-score">4.9</span><span>점</span>
+				</div>
+
+				<div class="review-star-container">
+					<div class="review-stars">
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+					</div>
+				</div>
+			</section>
+
+			<section class="review-score-bar-section">
+				<div class="review-score-bar-container">
+					<span>5점</span>
+					<div class="review-score-bar-bg">
+						<div class="review-score-bar"></div>
+					</div>
+					<span>00%</span>
+				</div>
+				<div class="review-score-bar-container">
+					<span>4점</span>
+					<div class="review-score-bar-bg">
+						<div class="review-score-bar"></div>
+					</div>
+					<span>00%</span>
+				</div>
+				<div class="review-score-bar-container">
+					<span>3점</span>
+					<div class="review-score-bar-bg">
+						<div class="review-score-bar"></div>
+					</div>
+					<span>00%</span>
+				</div>
+				<div class="review-score-bar-container">
+					<span>2점</span>
+					<div class="review-score-bar-bg">
+						<div class="review-score-bar"></div>
+					</div>
+					<span>00%</span>
+				</div>
+				<div class="review-score-bar-container">
+					<span>1점</span>
+					<div class="review-score-bar-bg">
+						<div class="review-score-bar"></div>
+					</div>
+					<span>00%</span>
+				</div>
+
+			</section>
+		</div>
+
+		<div class="review-sort-container">
+			<ul>
+				<li><a href="#" active>최신순</a></li>
+				<li><a href="#">평점 높은 순</a></li>
+				<li><a href="#">평점 낮은 순</a></li>
+			</ul>
+		</div>
+
+		<div class="review-container">
+			<div class="review">
+				<section class="review-user-section">
+					<div>
+						<div class="review-user-image" style="background-image: url('https://spy-family.net/tvseries/assets/img/top/chara_thumb2.png')"></div>
+						<span class="review-user-name">ANYA FORGER</span>
+					</div>
+					<div>
+						<div class="review-user-stars">
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						</div>
+					</div>
+				</section>
+				<section class="review-section">
+					<span class="review-one-sentence">(한줄평)인생책!!!!!!!</span>
+					<span class="review-content">
+                            (상세평)평소 팩트는 22호 파운데이션은 21호 ~22호 사이를 섞어서 사용 합니다
+                            웜톤인데 코렉트 업베이지가 저랑은 색이 좀더 잘 맞네요
+                            코렉트 업베이지는 노란끼가 좀더 있는 거 같고
+                            코렉트 베이지는 붉은끼가 살짝 있는 듯 합니다
+                            얼굴에 커피반점이 생겨서 가리는 용으로 샀는데 코렉트업베지라 밝아서 가려질까 했는데 예상외로 자연스럽게 잘가려 줘요
+                        </span>
+				</section>
+				<section class="review-recommend-section">
+					<div>
+						<i class="fa-solid fa-thumbs-up"></i>
+						<span>112</span>
+					</div>
+				</section>
+			</div>
+			<div class="review">
+				<section class="review-user-section">
+					<div>
+						<div class="review-user-image" style="background-image: url('https://spy-family.net/tvseries/assets/img/top/chara_thumb1.png')"></div>
+						<span class="review-user-name">LOID FORGER</span>
+					</div>
+					<div>
+						<div class="review-user-stars">
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						</div>
+					</div>
+				</section>
+				<section class="review-section">
+					<span class="review-one-sentence">[옵션] [펜슬기획]03코렉트업베이지</span>
+					<span class="review-content">
+                            뭐같음
+                        </span>
+				</section>
+				<section class="review-recommend-section">
+					<div>
+						<i class="fa-solid fa-thumbs-up"></i>
+						<span>11</span>
+					</div>
+				</section>
+			</div>
+			<div class="review">
+				<section class="review-user-section">
+					<div>
+						<div class="review-user-image" style="background-image: url('https://spy-family.net/tvseries/assets/img/top/chara_thumb3.png')"></div>
+						<span class="review-user-name">YOR FORGER</span>
+					</div>
+					<div>
+						<div class="review-user-stars">
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+						</div>
+					</div>
+				</section>
+				<section class="review-section">
+					<span class="review-one-sentence">[옵션] [펜슬기획]03코렉트업베이지</span>
+					<span class="review-content">
+                            평소 팩트는 22호 파운데이션은 21호 ~22호 사이를 섞어서 사용 합니다
+                            웜톤인데 코렉트 업베이지가 저랑은 색이 좀더 잘 맞네요
+                            코렉트 업베이지는 노란끼가 좀더 있는 거 같고
+                            코렉트 베이지는 붉은끼가 살짝 있는 듯 합니다
+                            얼굴에 커피반점이 생겨서 가리는 용으로 샀는데 코렉트업베지라 밝아서 가려질까 했는데 예상외로 자연스럽게 잘가려 줘요
+                        </span>
+				</section>
+				<section class="review-recommend-section">
+					<div>
+						<i class="fa-solid fa-thumbs-up"></i>
+						<span>1</span>
+					</div>
+				</section>
+			</div>
+		</div>
+	</section>
+
+</main>
+</body>
+</html>

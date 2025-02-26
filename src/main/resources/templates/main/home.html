@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>RD 홈페이지에 오신것을 환영합니다!</title>
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<link rel="stylesheet" href="../../static/css/main/home.css">
+	<script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script>
+	<script src="https://unpkg.com/embla-carousel-autoplay/embla-carousel-autoplay.umd.js"></script>
+	<script src="../../static/js/public/embla-carousel.js" defer></script>
+	<script src="../../static/js/main/home.js" defer></script>
+</head>
+<body>
+<main layout:fragment="main">
+	<section class="book-carousel">
+		<button class="carousel-btn prev-btn" onclick="prevBook()">&#9665;</button>
+
+		<div class="book-slide-container">
+			<div class="book-slide" th:each="book, iterStat : ${pBook5}" th:data-index="${iterStat.index}">
+				<div class="book-image">
+					<img th:src="${book.base64Image}" alt="Book Image">
+				</div>
+				<div class="book-info">
+					<h2 th:text="${book.title}"></h2>
+					<p><strong>저자:</strong> <span th:text="${book.author}"></span></p>
+					<p><strong>출판사:</strong> <span th:text="${book.publisher}"></span></p>
+					<p><strong>가격:</strong> <span th:text="${book.price}"></span>원</p>
+				</div>
+			</div>
+		</div>
+
+		<button class="carousel-btn next-btn" onclick="nextBook()">&#9655;</button>
+	</section>
+
+
+	<section class="books">
+		<h2>HOT TOPIC</h2>
+		<div class="book-list">
+			<div class="book">
+				<div class="box">
+						<h3 class="book-title" th:text="${pBook[0].title}"></h3> <!-- 책 제목 -->
+						<p class="book-detail" th:text="${pBook[0].detail}"></p> <!-- 책 상세 설명 -->
+
+						<div class="button-container">
+							<button type="button" class="link"
+							        th:onclick="|location.href='@{/book/{bookIsbn}(bookIsbn=${pBook[0].isbn})}'|">
+								대여하러가기
+							</button>
+						</div>
+				</div>
+
+				<div class="box">
+					<h3 class="discussion-id" th:text="${cDiscussion[0].userId}"></h3> <!-- 사용자 ID -->
+					<p class="discussion-topic" th:text="${cDiscussion[0].topic}"></p> <!-- 토론 주제 -->
+					<p class="discussion-content" th:text="${cDiscussion[0].contents}"></p> <!-- 토론 내용 -->
+
+					<div class="button-container">
+						<button type="button" class="link"
+						        th:data-url="@{/discussion/{discussionId}(discussionId=${cDiscussion[0].id})}"
+						        onclick="location.href=this.getAttribute('data-url')">
+							나도 참여하기
+						</button>
+					</div>
+				</div>
+
+				<div class="box">
+					<h3 th:text="${fComment.userId}"></h3>
+					<p th:text="${fComment.content}">이번주 토의좋아요 순위1</p>
+					<p th:text="${fComment.like}"></p>
+				</div>
+				<div class="box">
+					<h3 th:text="${sComment.userId}"></h3>
+					<p th:text="${sComment.content}">이번주 토의좋아요 순위2</p>
+					<h3 th:text="${sComment.like}"></h3>
+				</div>
+			</div>
+
+			<section class="discussions">
+				<h2>BEST SELLER</h2>
+				<ul>
+					<li>
+						<div class="image-container">
+							<img th:src="${pBook2[0].getBase64Image()}" alt="book1" border="0">
+						</div>
+						<p th:text="${pBook2[0].getDetail()}"></p>
+					</li>
+					<li>
+						<p th:text="${pBook2[1].getDetail()}"></p>
+						<div class="image-container">
+							<img th:src="${pBook2[1].getBase64Image()}" alt="book2" border="0">
+						</div>
+					</li>
+				</ul>
+			</section>
+		</div>
+	</section>
+</main>
+</body>
+</html>

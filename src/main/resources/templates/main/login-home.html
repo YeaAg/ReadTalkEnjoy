@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>RD 홈페이지에 오신것을 환영합니다!</title>
+    <link rel="stylesheet" href="../../static/css/main/login-home.css">
+    <script src="../../static/js/content/home.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menu-bar">
+                <li><div class="logo">Read Talk Enjoy</div></li>
+                <li><a href="../book/book-category.html" class="link">책</a></li>
+                <li><a href="../content/discussion-category.html">토론 게시판</a></li>
+                <li><a href="../user/complain.html">문의하기</a></li>
+                <li><a href="../user/my-page.html">
+                    <img src="../../static/img/main/예시%20프로필.png" alt="img" ></div>
+                </a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <!--여기에 API를 넣을 구간-->
+        <h1>베스트 셀러</h1>
+        <p>오늘의 추천작은?</p>
+    </section>
+
+    <section class="books">
+        <h2>HOT TOPIC</h2><hr/>
+        <div class="book-list">
+            <div class="book">
+                <div class="box">
+                    <h1>1퍼센트 부자들의 법칙: 성공과 부를 끌어당기는 비밀법칙</h1>
+                    <p>토익상세: 돈을 어떻게 하면 많이 모을 수 있을까요? 저가 알아낸,,</p>
+                    <button type="button" class="link" onclick="location.href='../book/book-category.html'" )>대여하러가기</button>
+                </div>
+
+                <div class="box">
+                    <h1>1퍼센트 부자들의 법칙: 성공과 부를 끌어당기는 비밀법칙</h1>
+                    <p>토익상세: 돈을 어떻게 하면 많이 모을 수 있을까요? 저가 알아낸,,</p>
+                    <button type="button" class="link" onclick="location.href='../content/discussion-category.html'">나도 참여하기</button>
+                </div>
+
+                <div class="box">
+                    <h1>이번주 토의좋아요 순위1</h1>
+                    <p>1퍼센트 부자들의 법칙: 성공과 부를 끌어당기는 비밀법칙의 토의에서</p>
+                    <p>의견 A: 돈이야 평생 버는 거 아니겠습니까? 허나 좀 더 쉽게,,,, </p>
+
+                </div>
+
+                <div class="box">
+                    <h1>이번주 토의좋아요 순위2</h1>
+                    <p>나미야 잡화점의 기적 토의에서</p>
+                    <p>의견 B: 주거칩입은 맞는데 기이한 일을 겪었잖아? 거기에서 해결,,, </p>
+
+                </div>
+
+            </div>
+
+            <section class="discussions">
+                <h2>BEST SELLER</h2>
+                <ul>
+                    <li>
+                        <div class="image-container">
+                            <img src="../../static/img/book1.webp?" alt="book1" border="0">
+                        </div>
+
+                        <p>"성공과 부를 끌어당기는 비밀 법칙!"
+                            성공적인 삶을 이끄는 강력한 원리들을 담은 책입니다.<br>
+                            말의 힘을 중요시하며, 긍정적인 에너지가 재산을 불리는 원동력이 될 수 있다고 강조합니다.
+                        </p>
+                    </li>
+
+                    <li>
+
+                        <p>"성공과 부를 끌어당기는 비밀 법칙!"
+                            성공적인 삶을 이끄는 강력한 원리들을 담은 책입니다.<br>
+                            말의 힘을 중요시하며, 긍정적인 에너지가 재산을 불리는 원동력이 될 수 있다고 강조합니다.
+                        </p>
+
+                        <div class="image-container">
+                            <img src="../../static/img/book2.webp" alt="book1" border="0">
+                        </div>
+                    </li>
+
+                </ul>
+            </section>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 독서토론 | 이용 약관 | 개인정보 처리방침 <br> 문의하기 | 연락처:10004-10004 </p>
+    </footer>
+
+    
+</body>
+</html>

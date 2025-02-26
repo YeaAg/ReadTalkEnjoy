@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 인증입니다</title>
+    <link rel="stylesheet" href="../../static/css/user/pw-auth.css">
+</head>
+
+<body>
+<main>
+    <h1>비밀번호 인증</h1>
+
+    <form th:action="@{/user/pw-auth}" method="post">
+        <section class="password-input-section">
+            <div class="pw-cert-container">
+                <span>비밀번호 입력</span>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="error-container">
+                <span>잘못된 비밀번호입니다</span>
+            </div>
+        </section>
+
+        <section class="auth-btn-section">
+            <button type="submit">인증</button>
+	        <button type="button" onclick="location.href='my-page'">취소</button>
+        </section>
+    </form>
+
+</main>
+</body>
+</html>

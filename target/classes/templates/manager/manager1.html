@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지 입니다.</title>
+    <link rel="stylesheet" href="../../static/css/manager/manager.css" type="text/css">
+    <script src="../../static/js/manager/manager.js" defer></script>
+</head>
+<body>
+
+  <nav class="nav-container">
+    <a class="search-box">
+      <input type="text" class="search-box-input" placeholder="Search" />
+      <button class="search-box-btn">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </a>
+
+    <a class="notification">
+      <span id="notification-name">관리자용 페이지</span>
+    </a>
+  </nav>
+
+  <div class="ani-navbar">
+    <aside class="ani-navbar-menu">
+      <div class="menu-title1">관리자 등록하기</div>
+    </aside>
+    <aside class="ani-navbar-menu">
+      <div class="menu-title2">책 등록</div>
+    </aside>
+    <aside class="ani-navbar-menu">
+      <div class="menu-title3">책 삭제</div>
+    </aside>
+    <aside class="ani-navbar-menu">
+      <div class="menu-title4">사용자 정보</div>
+    </aside>
+    <aside class="ani-navbar-menu">
+      <div class="menu-title5">문의사항</div>
+    </aside>
+  </div>
+
+  <div class="container">
+    <div id="content1" class="content-item">
+      <h4 class="my-4">Dashboard</h4>
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="card monthly">
+            <div class="card-body d-flex justify-content-between">
+              <div>
+                <p class="card-text mb-2">Earnings (Monthly)</p>
+                <h4>$400,000</h4>
+              </div>
+              <i
+                      class="fas fa-calendar"
+                      style="font-size: 30px; margin-top: 20px; color: #6c757d"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card annual">
+            <div class="card-body d-flex justify-content-between">
+              <div>
+                <p class="card-text mb-2">Earnings (Annual)</p>
+                <h4>$800,000</h4>
+              </div>
+              <i
+                      class="fa-solid fa-dollar-sign"
+                      style="font-size: 30px; margin-top: 20px; color: #6c757d"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card tasks">
+            <div class="card-body d-flex justify-content-between">
+              <div>
+                <p class="card-text mb-2">Tasks</p>
+                <h4>13</h4>
+              </div>
+              <i
+                      class="fa-solid fa-list-check"
+                      style="font-size: 30px; margin-top: 20px; color: #6c757d"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="card requests">
+            <div class="card-body d-flex justify-content-between">
+              <div>
+                <p class="card-text mb-2">Requests</p>
+                <h4>26</h4>
+              </div>
+              <i
+                      class="fa-solid fa-comments"
+                      style="font-size: 30px; margin-top: 20px; color: #6c757d"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content2" class="content-item">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="card-header h5">Earning Overview</div>
+          <div class="card-body"><canvas id="myChart"></canvas></div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header h5">Tasks</div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Borrowed Items</li>
+              <li class="list-group-item">Trello requests</li>
+              <li class="list-group-item">Marked Comments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content3" class="content-item"></div>
+
+    <div id="content4" class="content-item"></div>
+
+    <div id="content5" class="content-item"></div>
+  </div>
+
+</body>
+</html>

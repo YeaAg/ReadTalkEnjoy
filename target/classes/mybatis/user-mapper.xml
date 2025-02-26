@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.UserMapper">
+    <resultMap id="userWithSnsInfoMap" type="UserDTO" autoMapping="true">
+        <id property="id" column="id" />
+        <collection property="snsInfo" ofType="com.project.dto.SnsInfoDTO" javaType="list">
+            <id property="id" column="sns_id" />
+            <result property="name" column="name" />
+            <result property="connectedDate" column="connected_date" />
+        </collection>
+    </resultMap>
+    <!-- 유저 등록 -->
+    <insert id="createUser">
+        INSERT INTO user (id, password, ci, tel, email,
+                          join_date, point, profile_image,
+                          updated_at, role, nickname)
+        VALUES (#{id}, #{password}, #{ci}, #{tel}, #{email}, DEFAULT,
+                DEFAULT, #{profileImage}, DEFAULT, 'USER', #{nickname})
+    </insert>
+    <!-- id로 사용자 조회 -->
+    <select id="getUserById" resultType="UserDTO">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+    <!-- ci로 사용자 조회 -->
+    <select id="getUserByCi" resultType="UserDTO" resultMap="userWithSnsInfoMap">
+        SELECT *, USER.id AS user_id, SNS_INFO.id AS sns_id
+        FROM user USER
+                 LEFT OUTER JOIN sns_info SNS_INFO ON USER.id = SNS_INFO.user_id
+        WHERE USER.ci = #{ci}
+    </select>
+    <!-- 사용자 정보 업데이트 -->
+    <update id="updateUser">
+        UPDATE user
+        SET password = #{password}, tel = #{tel}, email = #{email}, nickname = #{nickname}, updated_at = DEFAULT
+        WHERE id = #{id}
+    </update>
+    <!-- sns 등록 -->
+    <insert id="insertSnsInfo">
+        INSERT INTO sns_info (id, user_id, name)
+        VALUES (#{id}, #{userId}, #{name})
+    </insert>
+    <!-- 사용자에게 포인트 부여 -->
+    <update id="addPointToUser">
+        UPDATE user SET point = point + #{points}
+        WHERE id = #{userId}
+    </update>
+    <!-- 사용 포인트 감소 -->
+    <update id="deductPoints">
+        UPDATE user SET point = point - #{points}
+        WHERE id = #{userId} AND point >= #{points}
+    </update>
+    <!-- 특정 사용자가 작성한 모든 Discussion 조회 -->
+    <select id="getAllDiscussionsByUser" resultType="java.lang.Integer">
+        SELECT id
+        FROM discussion
+        WHERE user_id = #{userId}
+    </select>
+    <!-- 컴플레인 생성 -->
+    <insert id="insertComplain">
+        INSERT INTO complain VALUES (NULL, #{title}, #{contents}, #{userId}, DEFAULT, DEFAULT);
+    </insert>
+    <!-- 아이디 찾기 -->
+    <select id="findIdByEmail" resultType="java.lang.String">
+        SELECT user.id FROM user WHERE email = #{email}
+    </select>
+    <!-- 모든 컴플레인 조회 -->
+    <select id="getComplains" resultType="ComplainDTO">
+        SELECT * FROM complain ORDER BY no
+    </select>
+    <!-- 사용자 컴플레인 조회 -->
+    <select id="getMyComplains" resultType="ComplainDTO">
+        SELECT * FROM complain WHERE user_id = #{userId}
+    </select>
+</mapper>

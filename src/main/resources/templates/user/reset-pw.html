@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/user/reset-pw.css">
+	<script src="../../static/js/user/reset-pw.js" defer></script>
+</head>
+<body>
+<main>
+	<h1>비밀번호 찾기</h1>
+	<form>
+		<section class="user-info-section">
+			<div class="id-input-container">
+				<span>아이디</span>
+				<label>
+					<input type="text" id="id" name="id">
+				</label>
+			</div>
+			<div class="email-input-container">
+				<span>이메일</span>
+				<label>
+					<input type="text" id="email" name="email">
+				</label>
+			</div>
+		</section>
+		<section class="change-btn-section">
+			<button type="submit">링크 받기</button>
+		</section>
+	</form>
+</main>
+</body>
+</html>

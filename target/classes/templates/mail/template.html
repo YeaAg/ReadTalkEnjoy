@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<style>
+	div{
+		color: red;
+	}
+</style>
+<body>
+<style>
+	section{
+		color: green;
+	}
+</style>
+<h1 th:text="${title}">메일 템플릿 테스트입니다^-^</h1>
+<a href="#" style="color: blue">클릭해봐! 링크!</a>
+<div>여기는 DIV</div>
+<section>여기는 SECTION</section>
+</body>
+</html>

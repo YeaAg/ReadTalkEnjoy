@@ -1,0 +1,39 @@
+@import url("../public/public.css");
+
+
+table {
+    margin: auto;
+    width: 900px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top: none;
+}
+.header {
+    background-color: rgb(218, 231, 255);
+    text-align: center;
+}
+.table td, .table th {
+    border-bottom: 1px lightgray solid;
+    height: 30px;
+    font-size: 20px;
+}
+.h2{
+    text-align: center;
+}
+.num {
+    width: 50px;
+}
+.title1 {
+    width: 500px;
+}
+.body {
+    text-align: center;
+}
+.title1 b {
+    text-align: center;
+}
+
+.title1:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}

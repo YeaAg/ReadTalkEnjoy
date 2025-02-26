@@ -1,0 +1,101 @@
+@import url("../public/public.css");
+
+body{
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+.header {
+    /*position: fixed;*/
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 75px;
+    padding: 1rem;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: initial;
+}
+
+.logo {
+
+    top: 20px;
+    margin: 0;
+    text-align: left;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+
+.menu-bar {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    position: relative;
+    font-family: bold;
+    list-style: none;
+    gap: 5px;
+    margin: 0 auto;
+    padding: 0;
+    width: 80%;
+    top: -15px;
+}
+
+.menu-bar > li{
+    position: relative;
+    flex: 1;
+    padding: 0px 10px;
+    &:hover .header-child-menu{
+        display: block;
+    }
+}
+
+.menu-bar > li > a{
+    color: black;
+    text-decoration: none;
+}
+
+.header-child-menu{
+    position: absolute;
+    display: none;
+    top: 100%;
+    transform: translateX(-10px);
+    width: 180px;
+    padding: 10px 0;
+    background-color: white;
+}
+
+.header-child-menu > li:hover > a{
+    transform: translateX(10px);}
+
+.header-child-menu > li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.header-child-menu a{
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    transition-duration: 0.3s;
+}
+
+.auth-buttons {
+    margin-left: 100px;
+    /*align-items: center;*/
+
+    display: flex;
+    width: 60px;
+    height: 60px;
+}
+
+
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>상품 리뷰 템플릿</title>
+	<meta name="_csrf" th:content="${_csrf.token}">
+	<meta name="_csrf_header" th:content="${_csrf.headerName}">
+	<script src="../../static/js/content/discussion.js" defer></script>
+</head>
+<body>
+<!-- ✅ Fragment를 감싸도록 추가 -->
+<div th:fragment="comment-section">
+	<div class="all-discussion-container">
+		<header>
+			<div>
+				<span>댓글: </span>
+				<b class="comment-count" th:text="|${commentCount}개|">13개</b>
+			</div>
+			<div class="review-sort-container">
+				<ul>
+					<li>
+						<a onclick="load_comment(event, this.href)" th:href="@{'/discussion/' + ${discussionId} + '/comment'(sort='recent')}">최신순</a>
+					</li>
+					<li>
+						<a onclick="load_comment(event, this.href)" th:href="@{'/discussion/' + ${discussionId} + '/comment'(sort='like')}">찬성순</a>
+					</li>
+					<li>
+						<a onclick="load_comment(event, this.href)" th:href="@{'/discussion/' + ${discussionId} + '/comment'(sort='dislike')}">반대순</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<div class="all-discussion">
+			<div class="one-discussion" th:each="comment : ${paginatedDiscussionComment.elements}" th:data-comment-id="${comment.id}">
+				<span th:text="${comment.userId}">참여자1</span>
+				<p th:text="${comment.content} ?: '내용 없음'">나는 ~~게 생각해서 ~~~가 더 맞는 것 같아</p>
+				<div class="agree-disagree-btn">
+					<button class="agree" th:data-comment-id="${comment.id}">
+						<span>찬성</span>
+						<span>|</span>
+						<span class="like-count" th:text="${comment.like}">55</span>
+					</button>
+					<button class="disagree" th:data-comment-id="${comment.id}">
+						<span>반대</span>
+						<span>|</span>
+						<span class="unlike-count" th:text="${comment.unlike}">4</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<ol class="pagination-container" th:if="${pageInfo.page <= pageInfo.totalPageCount}">
+			<!-- 이전 페이지 버튼 -->
+			<li th:if="${pageInfo.startPage != 1}">
+				<a onclick="load_comment(event, this.href)" th:href="@{'/discussion/' + ${discussionId} + 'comment'(page=${pageInfo.endPage - 1},sort=${pageInfo.sort})}">
+					<i class="bi bi-caret-left-fill"></i>
+				</a>
+			</li>
+			<!-- 페이지 번호 -->
+			<li th:if="${pageInfo.startPage <= pageInfo.endPage}"
+			    th:each="pageNumber : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+				<a onclick="load_comment(event, this.href)"
+				   th:href="@{'/discussion/' + ${discussionId} + '/comment'(page=${pageNumber}, sort=${pageInfo.sort})}"
+				   th:text="${pageNumber}"
+				   th:classappend="${pageInfo.page == pageNumber} ? 'active' : ''">
+				</a>
+			</li>
+			<!-- 다음 페이지 버튼 -->
+			<li th:if="${pageInfo.endPage != pageInfo.totalPageCount}">
+				<a onclick="load_comment(event, this.href)" th:href="@{|'/discussion/' + ${discussionId} + '/comment'(page=${pageInfo.endPage + 1}, sort=${pageInfo.sort})|}">
+					<i class="bi bi-caret-right-fill"></i>
+				</a>
+			</li>
+		</ol>
+	</div>
+</div>
+</body>
+</html>

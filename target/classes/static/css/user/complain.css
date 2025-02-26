@@ -1,0 +1,53 @@
+@import url("../public/public.css");
+
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+}
+
+.complain-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.complain-table {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+
+.complain-table thead {
+    background-color: rgb(218, 231, 255);
+}
+
+.complain-table th,
+.complain-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.complain-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+#complainBtn {
+    background-color: rgb(27, 76, 155);
+}
+
+#complainBtn {
+    width: 180px;
+    height: 50px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(68, 136, 244);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>상품 리뷰 템플릿</title>
+	<script src="https://kit.fontawesome.com/d19fdaba43.js" crossorigin="anonymous"></script>
+	<script src="../../static/js/book/book.js" defer></script>
+</head>
+<body>
+<div class="my-opinion-chat">
+	<h3>리뷰 작성하기</h3>
+	<form method="post" class="my-opinion-form">
+		<label>
+			<textarea name="text" placeholder="리뷰를 작성해주세요..."></textarea>
+		</label>
+		<button type="submit">작성하기</button>
+
+		<!-- ⭐ 별점 선택 UI -->
+		<div class="rating-container">
+			<span class="rating-label">별점 선택:</span>
+			<div class="star-rating">
+				<i class="fa-regular fa-star" data-value="1"></i>
+				<i class="fa-regular fa-star" data-value="2"></i>
+				<i class="fa-regular fa-star" data-value="3"></i>
+				<i class="fa-regular fa-star" data-value="4"></i>
+				<i class="fa-regular fa-star" data-value="5"></i>
+			</div>
+			<input type="hidden" name="rate" id="rating-value" value="0">
+		</div>
+	</form>
+</div>
+
+<div class="review-score-container">
+	<section class="review-score-section">
+		<div class="review-total-count-container">
+			<span>리뷰 총 </span><span class="review-total-count" th:text="${pageInfo.totalElementCount}">13,712</span><span> 건</span>
+		</div>
+
+		<div class="review-total-score-container">
+			<span class="review-total-score" th:text="${rateMap.isEmpty() ? 0.0 : #numbers.formatDecimal(rateMap['result']['avg'], 0, 1)}">4.9</span><span>점</span>
+		</div>
+
+		<div class="review-star-container">
+			<div class="review-stars">
+				<div class="review-stars">
+					<th:block th:each="rate: ${#numbers.sequence(1, 5)}" th:with="rateAverage=${rateMap.isEmpty() ? 0 : rateMap['result']['avg']}">
+						<i th:if="${rate <= rateAverage}" class="fa-solid fa-star"></i>
+						<i th:if="${rate > rateAverage}" class="fa-regular fa-star"></i>
+					</th:block>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="review-score-bar-section">
+		<div class="review-score-bar-container" th:each="rateNumber: ${#numbers.sequence(5, 1)}">
+			<span th:text="${rateNumber} + '점'">5점</span>
+			<div class="review-score-bar-bg">
+				<div class="review-score-bar" th:style="'width:' + ${rateMap.containsKey(rateNumber.toString()) ? rateMap[rateNumber.toString()]['count'] * 100 / pageInfo.totalElementCount : 0} + '%' "></div>
+			</div>
+			<span th:text="${rateMap.containsKey(rateNumber.toString()) ? rateMap[rateNumber.toString()]['count'] * 100/ pageInfo.totalElementCount : 0} + '%'">00%</span>
+		</div>
+	</section>
+</div>
+
+<div class="review-sort-container">
+	<ul>
+		<li><a onclick="load_review(event, this.href)" th:href="@{'/book/' + ${bookIsbn} + '/review'(sort='recent')}" active>최신순</a></li>
+		<li><a onclick="load_review(event, this.href)" th:href="@{'/book/' + ${bookIsbn} + '/review'(sort='high-rate')}">평점 높은 순</a></li>
+		<li><a onclick="load_review(event, this.href)" th:href="@{'/book/' + ${bookIsbn} + '/review'(sort='low-rate')}">평점 낮은 순</a></li>
+	</ul>
+</div>
+
+<div class="review-container">
+	<div class="review" th:each="review: ${pageInfo.elements}">
+		<section class="review-user-section">
+			<div>
+				<div class="review-user-image"
+				     th:style="'background-image: url(\'' + (${review.getBase64Image()} ?: '../../static/img/book_main.jpg') + '\');'">
+				</div>
+				<span class="review-user-name" th:text="${review.userId}" data-user-id="${review.userId}">ANYA FORGER</span>
+			</div>
+			<div>
+				<div class="review-user-stars">
+					<th:block th:each="rate: ${#numbers.sequence(1, 5)}">
+						<i th:if="${rate <= review.rate}" class="fa-solid fa-star"></i>
+						<i th:if="${rate > review.rate}" class="fa-regular fa-star"></i>
+					</th:block>
+				</div>
+			</div>
+		</section>
+		<section class="review-section">
+			<span class="review-content" th:text="${review.content}" data-content="${review.content}"></span>
+		</section>
+		<section class="review-recommend-section">
+			<div>
+				<i class="fa-solid fa-thumbs-up" data-content="${review.content}" data-user-id="${review.userId}"></i>
+				<span th:text="${review.like}">112</span>
+			</div>
+		</section>
+	</div>
+</div>
+
+
+<ol th:if="${pageInfo.page <= pageInfo.totalPageCount}">
+	<li th:if="${pageInfo.startPage != 1}">
+		<a onclick="load_review(event, this.href)" th:href="@{'/book/' + ${bookIsbn} + '/review'(page=${pageInfo.endPage - 1},sort=${pageInfo.sort})}">
+			<i class="bi bi-caret-left-fill"></i>
+		</a>
+	</li>
+	<li th:if="${pageInfo.startPage <= pageInfo.endPage}" th:each="pageNumber: ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+		<a onclick="load_review(event, this.href)"
+		   th:href="@{'/book/' + ${bookIsbn} + '/review'(page=${pageNumber},sort=${pageInfo.sort})}"
+		   th:text="${pageNumber}"
+		   th:active="${pageInfo.page == pageNumber}">1</a>
+	</li>
+	<li th:if="${pageInfo.endPage != pageInfo.totalPageCount}">
+		<a onclick="load_review(event, this.href)" th:href="@{'/book/' + ${bookIsbn} + '/review'(page=${pageInfo.endPage + 1},sort=${pageInfo.sort})}">
+			<i class="bi bi-caret-right-fill"></i>
+		</a>
+	</li>
+</ol>
+</body>
+</html>

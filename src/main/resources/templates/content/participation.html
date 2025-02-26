@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../static/css/content/discussion.css">
+    <script src="../../static/js/content/participation.js" defer></script>
+
+</head>
+<body>
+<main>
+    <h1>토론 게시판</h1>
+    <div class="my-opinion-container">
+        <div class="discussion-book-title">
+            <span>책 제목: </span>
+            <span>소년이 온다</span>
+        </div>
+        <div class="discussion-title">
+            <span>토론 주제: </span>
+            <p>내가 '소년이 온다'를 좋아하는 이유는?</p>
+        </div>
+        <div class="my-opinion">
+            <p>나의 의견은 ~~~~해</p>
+        </div>
+    </div>
+    <div class="my-opinion-chat">
+        <h3>
+            나의 의견은?
+        </h3>
+        <form method="post" class="my-opinion-form">
+            <label><textarea name="text" class="opinion-text"></textarea></label>
+            <button type="submit">작성하기</button>
+        </form>
+    </div>
+    <div class="all-discussion-container">
+        <header>
+            <div>
+                <span>댓글: </span>
+                <b class="comment-count">13개</b>
+            </div>
+            <div class="review-sort-container">
+                <ul>
+                    <li><a href="#" active>최신순</a></li>
+                    <li><a href="#">찬성순</a></li>
+                    <li><a href="#">반대순</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="all-discussion">
+            <div class="one-discussion">
+                <span>참여자1</span>
+                <p>나는 ~~게 생각해서 ~~~가 더 맞는 것 같아</p>
+                <div class="agree-disagree-status">
+                </div>
+                <div class="agree-disagree-btn">
+                    <button class="agree">
+                        <span>찬성</span>
+                        <span>|</span>
+                        <span>55</span>
+                    </button>
+                    <button class="disagree">
+                        <span>반대</span>
+                        <span>|</span>
+                        <span>4</span>
+                    </button>
+                </div>
+            </div>
+            <div class="one-discussion">
+                <span>참여자1</span>
+                <p>나는 ~~게 생각해서 ~~~가 더 맞는 것 같아</p>
+                <div class="agree-disagree-btn">
+                    <button class="agree">
+                        <span>찬성</span>
+                        <span>|</span>
+                        <span>55</span>
+                    </button>
+                    <button class="disagree">
+                        <span>반대</span>
+                        <span>|</span>
+                        <span>4</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

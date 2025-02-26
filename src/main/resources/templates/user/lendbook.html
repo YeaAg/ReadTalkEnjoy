@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>내가 얼마나 대여를 했을까요?</title>
+	<link rel="stylesheet" href="../../static/css/content/lendbook.css" type="text/css">
+</head>
+<body>
+<main layout:fragment="main">
+	<h1>나의 대여 목록</h1>
+	<header1>
+		<div>
+			<span>대여한 권수:</span>
+			<b th:text="${activeLoanCount} + '건'">13건</b>
+		</div>
+	</header1>
+
+	<hr/>
+
+	<main1>
+		<div class="wishlist" id="wishlist-container">
+			<!-- 대여 목록이 없을 경우 -->
+			<div th:if="${loanBookMap.isEmpty()}">
+				<p>대여한 책이 없어요ㅠㅠ</p>
+				<a href="../book/book-category" class="link">책 보러가기!</a>
+			</div>
+
+			<!-- 대여 목록이 있을 경우 -->
+			<div th:if="${not loanBookMap.isEmpty()}">
+				<ul>
+					<li th:each="entry : ${loanBookMap}">
+						<div class="book-item">
+							<!-- Book Image -->
+							<img th:src="${entry.value.getBase64Image()}" alt="Book Cover" class="book-cover" />
+
+							<!-- Book Title and Author -->
+							<div class="book-details">
+								<h3 th:text="${entry.value.getTitle()}">Book Title</h3>
+								<p th:text="${entry.value.getAuthor()}">Author</p>
+							</div>
+
+							<!-- Loan Return Date -->
+							<div class="loan-info">
+								<p th:text="'반납 예정일: ' + ${#temporals.format(entry.key.getReturnDate(), 'yyyy-MM-dd')}">
+									반납 예정일
+								</p>
+							</div>
+
+							<!-- 책 보러가기 버튼 -->
+							<button type="button" class="link"
+							        th:onclick="|location.href='@{/book/viewer/{bookIsbn}(bookIsbn=${entry.value.isbn})}'|">
+								책보러가기
+							</button>
+
+							<!-- 반납 버튼 -->
+							<form th:action="@{/user/book/return/{bookIsbn}(bookIsbn=${entry.value.isbn})}" method="post">
+								<button type="submit" class="link">반납</button>
+							</form>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</main1>
+</main>
+</body>
+</html>

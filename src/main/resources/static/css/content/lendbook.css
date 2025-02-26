@@ -1,0 +1,89 @@
+@import url("../public/public.css");
+
+
+h1{
+    text-align: center;
+    margin: 60px;
+}
+/***********************************/
+
+header1{
+    justify-content: space-between;
+    font-size: var(--font-size-x-small);
+    margin: 20px;
+    color: var(--Dark-gray-textured-background---4-rgba);
+}
+
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  /* 요소 간 간격 */
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+}
+
+.book-item {
+    width: 250px;  /* 고정 크기 */
+    height: 500px; /* 고정 높이 */
+    box-sizing: border-box;
+
+}
+
+
+.book-cover{
+    width: 250px;
+    height: 300px; /* 이미지 크기 고정 */
+    object-fit: cover;
+}
+
+.book-info {
+    flex-grow: 1;  /* 정보가 적어도 균형 유지 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-info h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.book-info p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 반응형 처리 */
+@media (max-width: 1024px) {
+    .book-item {
+        width: calc(33.333% - 20px); /* 3개씩 */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-item {
+        width: calc(50% - 20px); /* 2개씩 */
+    }
+}
+
+@media (max-width: 480px) {
+    .book-item {
+        width: 100%; /* 1개씩 */
+    }
+}
+
+.book-item button {
+    background-color: #007BFF;
+    padding: 5px 10px;
+    color: white;
+    border-radius:20px;
+    border: none;
+}
+
+.book-item button:hover {
+    background-color: #555555;
+    cursor: pointer;
+}

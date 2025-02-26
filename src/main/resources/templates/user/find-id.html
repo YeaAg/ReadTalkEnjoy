@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/user/find-id.css">
+	<script src="../../static/js/user/find-id.js" defer></script>
+</head>
+
+<body>
+<main layout:fragment="main">
+	<h1>아이디 찾기</h1>
+	<form>
+		<section class="user-info-revise-section">
+			<div class="email-input-container">
+				<span>이메일</span>
+				<input type="text" id="email" name="email">
+				<button type="button">인증하기</button>
+			</div>
+			<div class="error-container">
+				<span>존재하지 않는 이메일입니다</span>
+			</div>
+			<div class="email-auth-input-container">
+				<span>인증번호</span>
+				<label class="input-label"><input type="text" placeholder="인증번호를 입력하세요"></label>
+				<button type="button">확인</button>
+			</div>
+		</section>
+
+		<section class="find-btn-section">
+			<button type="submit">찾기</button>
+		</section>
+	</form>
+
+
+	<section class="find-id-section">
+		<div class="find-id-container">
+			<label>
+				<span></span>
+			</label>
+			<button>로그인하러 가기</button>
+		</div>
+	</section>
+</main>
+</body>
+</html>

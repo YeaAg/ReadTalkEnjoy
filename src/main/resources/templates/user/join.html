@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/login/join.css">
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="../../static/js/user/join.js" defer></script>
+</head>
+<body>
+<main layout:fragment="main">
+	<h1>회원가입</h1>
+	<form th:action="@{/user/join}" method="post">
+		<h2>필수정보</h2>
+		<section>
+			<div class="id-input-container">
+				<label class="input-label">
+					<i class="bi bi-person-fill"></i>
+					<input type="text" id="id" name="id" placeholder="아이디를 입력하세요">
+				</label>
+				<button type="button">중복검사</button>
+				<input type="hidden" name="id-check">
+				<input type="hidden" name="id-check-valid" value="false">
+			</div>
+			<div class="error-container">
+				<span>아이디 형식이 잘못되었습니다</span>
+			</div>
+			<div class="error-container">
+				<span>아이디 형식이 잘못되었습니다</span>
+			</div>
+			<div class="pw-input-container">
+				<label class="input-label">
+					<i class="bi bi-lock-fill"></i>
+					<input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요 (10자 이내, 영문자+숫자+특수문자 조합)">
+				</label>
+			</div>
+			<div class="pw-re-input-container">
+				<label class="input-label">
+					<i class="bi bi-lock-fill"></i>
+					<input type="password" id="password-re" placeholder="비밀번호를 재입력하세요">
+				</label>
+			</div>
+			<div class="error-container">
+				<span>비밀번호 형식이 잘못되었습니다</span>
+			</div>
+			<div class="tel-input-container">
+				<label class="input-label">
+					<i class="bi bi-telephone-fill"></i>
+					<input type="text" id="tel" name="tel" placeholder="휴대전화 번호를 입력하세요">
+				</label>
+				<button type="button">인증하기</button>
+			</div>
+			<div class="error-container">
+				<span>전화번호 형식이 잘못되었습니다</span>
+			</div>
+			<div class="email-input-container">
+				<label class="input-label">
+					<i class="bi bi-envelope-fill"></i>
+					<input type="text" name="email">
+				</label>
+				<i class="bi bi-at"></i>
+				<label class="email-middle-label"><input type="text" name="email"></label>
+				<label class="email-tail-label">
+					<select>
+						<option selected>직접입력</option>
+						<option>naver.com</option>
+						<option>google.com</option>
+						<option>nate.com</option>
+					</select>
+				</label>
+				<button type="button">인증하기</button>
+			</div>
+			<div class="error-container">
+				<span>이메일 형식이 잘못되었습니다</span>
+			</div>
+			<div class="email-auth-input-container">
+				<label class="input-label"><input type="text" placeholder="인증번호를 입력하세요"></label>
+				<button type="button">확인</button>
+			</div>
+		</section>
+
+		<h2>선택정보</h2>
+		<section>
+			<div class="nickname-input-container">
+				<i class="bi bi-highlighter"></i>
+				<label><input type="text" name="nickname" placeholder="닉네임을 입력하세요"></label>
+			</div>
+			<div class="image-input-container">
+				<i class="bi bi-image"></i>
+				<label><input type="file"></label>
+			</div>
+		</section>
+
+		<section class="join-btn-section">
+			<button type="submit">가입하기</button>
+			<button type="button">돌아가기</button>
+		</section>
+	</form>
+</main>
+</body>
+</html>

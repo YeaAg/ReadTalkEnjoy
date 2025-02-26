@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/content/discussion.css">
+	<link rel="stylesheet" href="../../static/css/public/header.css">
+	<script src="../../static/js/content/discussion.js" defer></script>
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+</head>
+<body>
+<header th:replace="~{/public/header :: header}"></header>
+<main>
+	<h1>토론 게시판</h1>
+	<div class="my-opinion-container">
+		<form method="post" name="discussionId" th:id="${discussion.id}">
+			<div class="discussion-book-title">
+				<span>책 제목: </span>
+				<span th:text="${discussion.bookTitle}">소년이 온다</span>
+			</div>
+			<div class="discussion-title">
+				<span>토론 주제: </span>
+				<p th:text="${discussion.topic}">내가 '소년이 온다'를 좋아하는 이유는?</p>
+			</div>
+			<div class="my-opinion">
+				<p th:text="${discussion.contents}">나의 의견은 ~~~~해</p>
+			</div>
+		</form>
+	</div>
+	<div class="my-opinion-chat">
+		<h3>
+			나의 의견은?
+		</h3>
+		<form th:action="@{/comment/add}" method="post" class="my-opinion-form">
+			<label><textarea name="text" class="opinion-text"></textarea></label>
+			<button type="submit">작성하기</button>
+		</form>
+	</div>
+	<div class="all-discussion-container">
+		<header>
+			<div>
+				<span>댓글: </span>
+				<b class="comment-count">13개</b>
+			</div>
+			<div class="review-sort-container">
+				<ul>
+					<li><a></a>최신순</li>
+					<li><a></a></li>
+					<li><a></a></li>
+				</ul>
+			</div>
+		</header>
+		<div class="all-discussion">
+			<div class="one-discussion">
+				<span>참여자1</span>
+				<p>나는 ~~게 생각해서 ~~~가 더 맞는 것 같아</p>
+				<div class="agree-disagree-btn">
+					<button class="agree">
+						<span>찬성</span>
+						<span>|</span>
+						<span class="like-count">55</span>
+					</button>
+					<button class="disagree">
+						<span>반대</span>
+						<span>|</span>
+						<span class="unlike-count">4</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+</body>
+</html>

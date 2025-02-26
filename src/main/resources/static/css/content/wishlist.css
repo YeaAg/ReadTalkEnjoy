@@ -1,0 +1,125 @@
+@import url("../public/public.css");
+
+h1{
+    text-align: center;
+    margin: 60px;
+}
+/***********************************/
+
+.category{
+    text-align: left;
+    margin: 20px 0;
+    padding: 0 250px;
+    font-size: 30px;
+    color: var(--Dark-gray-textured-background---4-rgba);
+}
+
+
+.content1 {
+    margin: 20px 0;
+    padding: 0 250px;
+    text-align: center;
+}
+
+ol{
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ol > li {
+    margin: 0 8px;
+}
+ol a{
+    color: black;
+    font-size: var(--font-size-x-small);
+    font-weight: normal;
+}
+ol a[active=true]{
+    font-weight: bold;
+}
+
+
+
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  /* 요소 간 간격 */
+    padding: 0;
+    list-style: none;
+    justify-content: center;
+}
+
+.book-item {
+    width: 250px;  /* 고정 크기 */
+    height: 350px; /* 고정 높이 */
+    box-sizing: border-box;
+}
+
+.book-card {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 내용 정렬 */
+}
+
+.book-image {
+    width: 100%;
+    height: 180px; /* 이미지 크기 고정 */
+    object-fit: cover;
+}
+
+.book-info {
+    flex-grow: 1;  /* 정보가 적어도 균형 유지 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-info h3 {
+    font-size: 1.2rem;
+    margin: 10px 0 5px;
+}
+
+.book-info p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* 반응형 처리 */
+@media (max-width: 1024px) {
+    .book-item {
+        width: calc(33.333% - 20px); /* 3개씩 */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-item {
+        width: calc(50% - 20px); /* 2개씩 */
+    }
+}
+
+@media (max-width: 480px) {
+    .book-item {
+        width: 100%; /* 1개씩 */
+    }
+}
+
+#cartBtn {
+    width: 50px;
+    height: 20px;
+    background-color: #e2e2e2;
+}
+
+#cartBtn:hover {
+    background-color: darkgrey;
+    cursor: pointer;
+}

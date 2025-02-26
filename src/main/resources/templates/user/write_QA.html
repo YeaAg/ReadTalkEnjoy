@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>글 등록 화면</title>
+	<link rel="stylesheet" href="../../static/css/user/write.css?ver=1" type="text/css">
+</head>
+<body>
+<main layout:fragment="main">
+	<form th:action="@{/complain/add}" method="post">
+		<table>
+			<tr><td><h2>문의 사항 글쓰기</h2></td></tr>
+			<tr><td class="header">문의 사항</td></tr>
+			<tr><td><input type="text" placeholder="제목을 입력하세요" name="title"></td></tr>
+			<tr><td class="header">문의 사항에 대해서 상세하게 적기</td></tr>
+			<tr><td><textarea placeholder="상세하게 내용을 기제해주세요. 욕설과 비방은 사양합니다" name="contents"></textarea></td></tr>
+			<tr><td><input type="submit" value="등록" onclick="alert('문의 사항이 접수되었습니다. 관리자 답변을 기달려 주세요')" ></td></tr>
+		</table>
+	</form>
+</main>
+</body>
+</html>

@@ -1,0 +1,29 @@
+@import url("../public/public.css");
+
+/* ✅ 페이지 전체 높이 설정 */
+html, body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ✅ 메인 콘텐츠가 푸터 위로 올라가도록 설정 */
+main {
+    flex: 1;
+}
+
+/* ✅ 푸터 스타일 */
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: white;
+    position: relative; /* 기본적으로 하단에 배치 */
+}
+
+/* ✅ 푸터 내부 글씨 스타일 */
+footer p {
+    margin: 0;
+    font-size: 18px;
+}

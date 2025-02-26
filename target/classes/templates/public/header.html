@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>홈페이지 헤더</title>
+	<link rel="stylesheet" href="../../static/css/public/header.css">
+</head>
+<body>
+<header th:fragment="header" id="main-header">
+	<div class="header-content">
+		<!-- 로고 -->
+		<a class="logo" th:href="@{/}">Read Talk Enjoy</a>
+
+		<!-- 네비게이션 메뉴 -->
+		<nav class="menu-container">
+			<ul class="menu-bar">
+				<li><a th:href="@{/book/book-category}">책</a></li>
+				<li><a th:href="@{/discussion/category}">토론 게시판</a></li>
+				<li><a th:href="@{/complain}">문의하기</a></li>
+			</ul>
+		</nav>
+
+		<!-- 로그인 & 회원가입 / 사용자 메뉴 -->
+		<div class="auth-buttons">
+			<!-- 비로그인 상태 -->
+			<div sec:authorize="not authenticated" class="user-logged-out">
+				<button class="login-button" th:onclick="|location.href='@{/user/login}'|">로그인</button>
+				<button class="signup-button" th:onclick="|location.href='@{/user/join}'|">회원가입</button>
+			</div>
+
+			<!-- 로그인 상태 -->
+			<div sec:authorize="authenticated" class="user-logged-in">
+				<a th:href="@{/user/my-page}" class="user-icon">
+					<i class="bi bi-person-circle"></i>
+				</a>
+				<form name="logout-form" th:action="@{/user/logout}" method="post">
+					<button class="logout-button">
+						<i class="bi bi-box-arrow-right"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</header>
+</body>
+</html>

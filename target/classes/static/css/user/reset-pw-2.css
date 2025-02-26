@@ -1,0 +1,111 @@
+@import url("../public/public.css");
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+main h1{
+    font-size: 50px;
+    font-family: Bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 50px;
+    border-bottom: 5px solid black;
+}
+/*************************************/
+form{
+    background-color: transparent;
+    font-size: var(--font-size-normal);
+    text-align: center;
+    padding: 60px 80px;
+    width: 800px;
+}
+form span{
+    text-align: left;
+    width: 250px;
+    justify-content: center;
+}
+form input{
+    font-size: var(--font-size-small);
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+form > section > div{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+form > section > div > label{
+    display: flex;
+    width: 100%;
+}
+.user-info-revise-section{
+    padding: 70px 50px;
+    border-top: 2px solid #512e02;
+}
+.user-info-revise-section > div > label > button{
+    font-family: Medium;
+    font-size: var(--font-size-small);
+    width: 150px;
+    margin-left: 5px;
+    padding: 0 10px;
+    background-color: var(--Summer-spring-decoration-design-elements-2-rgba);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.8;
+    }
+}
+/********************************/
+.change-btn-section{
+    text-align: center;
+    padding: 0 50px;
+}
+.change-btn-section > button {
+    /*margin: 0 20px;*/
+    padding: 10px 20px;
+    width: 100%;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 0.2s;
+    background-color: var(--Summer-spring-decoration-design-elements-2-rgba);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+/********************************/
+.pw-error-container{
+    display: none;
+    margin-top: 10px;
+    font-size: var(--font-size-small);
+}
+.pw-error-container span{
+    width: 100%;
+    color: indianred;
+}
+.pw-error-container[active]{
+    display: block;
+}
+.pw-re-error-container{
+    display: none;
+    margin-top: 10px;
+    font-size: var(--font-size-small);
+}
+.pw-re-error-container span{
+    width: 100%;
+    color: indianred;
+}
+.pw-re-error-container[active]{
+    display: block;
+}

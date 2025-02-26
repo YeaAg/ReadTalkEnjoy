@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="../../static/css/user/myTalk.css" type="text/css">
+</head>
+<body>
+<main layout:fragment="main">
+	<table class="table">
+		<tr><td colspan="2"><h2>My Discussions</h2></td></tr>
+		<tr class="header">
+			<td class="title">제목</td>
+			<td>작성날짜</td>
+		</tr>
+		<tr class="title1" th:each="discussion, iterStat : ${myDiscussion}"
+		th:onclick="|location.href='@{/discussion/{discussionId}(discussionId=${discussion.id})}'|">
+			<td class="content2"><b th:text="${discussion.getTopic()}">title : </b></td>
+			<td class="day"><b th:text="${discussion.getCreatedAt()}">작성날짜 : </b></td>
+		</tr>
+	</table>
+</main>
+</body>
+</html>

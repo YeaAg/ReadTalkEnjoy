@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>문의 상세 보기</title>
+	<link rel="stylesheet" href="../../static/css/user/complain-detail.css">
+</head>
+<body>
+<main layout:fragment="main">
+	<h1>문의 상세 보기</h1>
+
+	<div class="complain-container">
+		<form method="post" name="complainNo" th:id="${complain.no}">
+			<div class="complain-title">
+				<span>제목: </span>
+				<span th:text="${complain.title}">문의 제목</span>
+			</div>
+			<div class="complain-user">
+				<span>작성자: </span>
+				<span th:text="${complain.userId}">user123</span>
+			</div>
+			<div class="complain-content">
+				<p th:text="${complain.contents}">문의 내용이 여기에 표시됩니다.</p>
+			</div>
+			<div class="complain-date">
+				<span>작성 날짜: </span>
+				<span th:text="${complain.uploadedAt}">2024-01-01</span>
+			</div>
+		</form>
+	</div>
+
+	<div class="complain-reply">
+		<h3>관리자 답변</h3>
+		<div th:if="${complain.answer != null}">
+			<p th:text="${complain.answer}">관리자의 답변이 여기에 표시됩니다.</p>
+		</div>
+		<div th:if="${complain.answer == null}">
+			<p>아직 답변이 등록되지 않았습니다.</p>
+		</div>
+	</div>
+</main>
+</body>
+</html>

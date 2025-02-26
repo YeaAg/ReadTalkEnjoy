@@ -1,0 +1,78 @@
+main {
+    position: relative;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+h1 {
+    font-size: 50px;
+    font-family: Bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 50px;
+    border-bottom: 5px solid black;
+}
+
+/* 문의 상세 페이지 컨테이너 */
+.complain-container {
+    text-align: left;
+    padding: 30px;
+}
+.complain-title,
+.complain-user,
+.complain-date {
+    display: flex;
+    font-size: var(--font-size-large);
+    margin-bottom: 10px;
+}
+.complain-title span:first-child,
+.complain-user span:first-child,
+.complain-date span:first-child {
+    font-weight: bold;
+    margin-right: 10px;
+}
+.complain-content {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 30px;
+    font-size: var(--font-size-small);
+    min-height: 200px;
+    box-sizing: border-box;
+}
+
+/* 관리자 답변 스타일 */
+.complain-reply {
+    padding: 30px 30px 0 30px;
+    text-align: left;
+}
+.complain-reply h3 {
+    font-size: var(--font-size-normal);
+    margin-bottom: 10px;
+}
+.complain-reply p {
+    font-size: var(--font-size-small);
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+/* 버튼 스타일 */
+.complain-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.complain-buttons button {
+    font-size: var(--font-size-small);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: 0.3s;
+}
+.complain-buttons button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,269 @@
+@import url("../public/public.css");
+
+body{
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+.header {
+    /*position: fixed;*/
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 75px;
+    padding: 1rem;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: initial;
+}
+
+.logo {
+
+    top: 20px;
+    margin: 0;
+    text-align: left;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+.menu-bar {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    position: relative;
+    font-family: bold;
+    list-style: none;
+    gap: 5px;
+    margin: 20px;
+    padding: 20px;
+    width: 1400px;
+    top: -15px;
+}
+
+.menu-bar > li{
+    position: relative;
+    flex: 1;
+    padding: 0px 10px;
+    &:hover .header-child-menu{
+        display: block;
+    }
+}
+
+.menu-bar > li > a{
+    color: black;
+    text-decoration: none;
+}
+
+.header-child-menu{
+    position: absolute;
+    display: none;
+    top: 100%;
+    transform: translateX(-10px);
+    width: 180px;
+    padding: 10px 0;
+    background-color: white;
+}
+
+.header-child-menu > li:hover > a{
+    transform: translateX(10px);}
+
+.header-child-menu > li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.header-child-menu a{
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    transition-duration: 0.3s;
+}
+
+.auth-buttons {
+    margin-left: 30px;
+    /*align-items: center;*/
+
+    display: flex;
+
+}
+
+.login-button, .signup-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+}
+
+.login-button:hover, .signup-button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+    /*메뉴 리스트*/
+    /*.header-child-menu {*/
+    /*    text-align: right;*/
+    /*    display: none;*/
+    /*    top: 100%;*/
+    /*    transform: translateX(-10px);*/
+    /*    width: 180px;*/
+    /*    padding: 10px 0;*/
+    /*    background-color: white;*/
+    /*}*/
+
+    /*.header-child-menu > li:hover > a{*/
+    /*    transform: translateX(10px);}*/
+
+    /*.header-child-menu > li{*/
+    /*    list-style-type: none;*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*}*/
+    /*.header-child-menu a{*/
+    /*    color: black;*/
+    /*    text-decoration: none;*/
+    /*    display: block;*/
+    /*    padding: 10px 20px;*/
+    /*    transition-duration: 0.3s;*/
+    /*}*/
+
+
+    .button {
+        position: relative;
+        text-align: right;
+
+    }
+
+    .login-button, .signup-button {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+    }
+
+    .login-button:hover, .signup-button:hover {
+        background-color: #0056b3;
+    }
+
+
+    /*conent*/
+
+    .banner {
+        padding: 500px;
+        background: #f4f4f4;
+    }
+
+    .banner h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+    }
+
+
+    .books {
+        padding: 50px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .book {
+        display: grid;
+        grid-template-columns:repeat(2, 1fr);
+        grid-auto-rows: 250px;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .box {
+        background-color: #dddddd;
+        text-align: center;
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        font-size: 20px;
+    }
+
+
+    .book button {
+        margin: 5px;
+        padding: 10px 20px;
+        border: none;
+        background: #007BFF;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right;
+        margin-bottom: 15px;
+
+    }
+
+    .book button:hover {
+        background-color: gray;
+    }
+
+    .book hr {
+        border: none;
+        border-top: 1px solid #ddd;
+        margin: 15px 0;
+    }
+
+
+
+    .books, .discussions {
+        padding: 20px;
+    }
+
+    .discussions li{
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+    }
+    .discussions .image-container{
+        width: 400px;
+        text-align: center;
+    }
+    .discussions img{
+        width: 100%;
+        height: 100%;
+    }
+
+    .discussions p{
+        flex: 3;
+    }
+    footer p {
+        text-align: center;
+        padding: 10px;
+        background: #333;
+        color: white;
+    }
+
+footer p {
+    text-align: center;
+    padding: 10px;
+    background: #333;
+    color: white;
+}
+
+.rollUp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+}

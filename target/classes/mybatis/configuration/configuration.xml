@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- ALIAS 정의 -->
+    <typeAliases>
+        <typeAlias type="com.project.dto.AdminPostDTO" alias="AdminPostDTO" />
+        <typeAlias type="com.project.dto.BookDTO" alias="BookDTO" />
+        <typeAlias type="com.project.dto.BookImageDTO" alias="BookImageDTO" />
+        <typeAlias type="com.project.dto.CartDTO" alias="CartDTO" />
+        <typeAlias type="com.project.dto.CategoryDTO" alias="CategoryDTO" />
+        <typeAlias type="com.project.dto.ComplainDTO" alias="ComplainDTO" />
+        <typeAlias type="com.project.dto.DiscussionCommentDTO" alias="DiscussionCommentDTO" />
+        <typeAlias type="com.project.dto.DiscussionDTO" alias="DiscussionDTO" />
+        <typeAlias type="com.project.dto.LoanDTO" alias="LoanDTO" />
+        <typeAlias type="com.project.dto.NotificationDTO" alias="NotificationDTO" />
+        <typeAlias type="com.project.dto.PageInfoDTO" alias="PageInfoDTO" />
+        <typeAlias type="com.project.dto.ReviewDTO" alias="ReviewDTO" />
+        <typeAlias type="com.project.dto.SnsInfoDTO" alias="SnsInfoDTO" />
+        <typeAlias type="com.project.dto.UserDTO" alias="UserDTO" />
+    </typeAliases>
+</configuration>
+
+
+
+
+

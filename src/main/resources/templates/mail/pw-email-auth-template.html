@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>비밀번호 변경 이메일 인증</title>
+</head>
+<body>
+<h4>아래 링크를 클릭하여 비밀번호를 변경하세요</h4>
+<p>
+	<a th:text="${passwordLink}" th:href="${passwordLink}"></a>
+</p>
+</body>
+</html>

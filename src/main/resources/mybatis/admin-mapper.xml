@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.AdminMapper">
+    <!-- 관리자 등록 -->
+    <update id="createAdmin">
+        UPDATE user SET role = 'ADMIN' WHERE id = #{userId}
+    </update>
+    <!-- 최근 1주일 동안 정보를 변경한 유저 -->
+    <select id="getUpdatedUser" resultType="UserDTO">
+        SELECT *
+        FROM user
+        WHERE updated_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+    </select>
+    <!-- 사용자 삭제 -->
+    <delete id="deleteUser">
+        DELETE user FROM user WHERE id = #{id}
+    </delete>
+    <update id="answerToUser">
+        UPDATE complain SET answer = #{answer} WHERE complain.no = #{complainNo}
+    </update>
+    <select id="getPublicUser" resultType="UserDTO">
+        SELECT * FROm user WHERE role = 'USER'
+    </select>
+</mapper>

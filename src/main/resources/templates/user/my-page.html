@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+	<meta charset="UTF-8">
+	<title>나의 페이지</title>
+	<link rel="stylesheet" href="../../static/css/user/Mypage.css" type="text/css">
+</head>
+<body>
+<header>
+	<img th:src="${user.base64Image}" alt="img">
+	<p th:text="${user.getId()}">나는야 나무 늘보</p>
+	<p th:text="${user.getEmail()}">woriah1234@daum.net</p>
+</header>
+
+<div class="jb-division-line"></div>
+
+<main>
+	<ul class="menu-bar">
+		<li><a th:href="@{/user/my-talk}">나의 토론 게시글</a></li>
+		<li><a th:href="@{/user/lendbook}">대여</a></li>
+		<li><a th:href="@{/user/wishlist}">찜</a></li>
+		<li><a th:href="@{/user/pw-auth}">회원정보수정</a></li>
+		<li><a th:href="@{/user/complain}">문의사항</a></li>
+	</ul>
+</main>
+</body>
+</html>

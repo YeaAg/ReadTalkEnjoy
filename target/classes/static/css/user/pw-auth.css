@@ -1,0 +1,151 @@
+@import url("../public/public.css");
+
+main{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    width: 1200px;
+    margin: 120px auto;
+    text-align: center;
+}
+
+main h1{
+    font-size: 50px;
+    font-family: Bold;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 50px;
+    border-bottom: 5px solid black;
+}
+/*************************************/
+form{
+    position: relative;
+    background-color: transparent;
+    font-size: var(--font-size-normal);
+    text-align: center;
+    padding: 60px 80px;
+    width: 800px;
+}
+form span{
+    text-align: left;
+    width: 250px;
+    justify-content: center;
+}
+form input{
+    font-size: var(--font-size-small);
+    /*width: 100%;*/
+    padding: 8px 10px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+form > section > div{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.password-input-section{
+    padding: 70px 50px;
+    border-top: 2px solid #512e02;
+}
+.password-input-section button {
+    padding: 10px 20px;
+    width: 170px;
+    height: 100%;
+    margin-left: 10px;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    /*border-radius: 20px;*/
+    border: none;
+    transition-duration: 0.2s;
+    background-color: var(--Summer-spring-decoration-design-elements-2-rgba);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+/********************************/
+.auth-btn-section{
+    /*margin: 20px 0 20px 0;*/
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0 50px;
+}
+.auth-btn-section > button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    width: 100px;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 0.2s;
+    background-color: var(--Summer-spring-decoration-design-elements-2-rgba);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+/*************************************/
+.find-id-section{
+    display: none;
+    padding: 60px 80px;
+    width: 800px;
+}
+.find-id-section[active]{
+    display: block;
+    position: relative;
+    background-color: transparent;
+    font-size: var(--font-size-normal);
+    text-align: center;
+    padding: 60px 80px;
+    width: 800px;
+}
+
+.find-id-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 50px;
+    border-top: 2px solid #512e02;
+}
+.find-id-container label{
+    padding-top: 35px;
+}
+.find-id-container span{
+    font-size: var(--font-size-normal);
+}
+.find-id-container span:first-child{
+    margin-right: 20px;
+}
+.find-id-container button{
+    padding: 10px 20px;
+    margin-top: 77px;
+    width: 100%;
+    font-size: var(--font-size-small);
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 0.2s;
+    background-color: var(--Summer-spring-decoration-design-elements-2-rgba);
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+/********************************/
+.error-container{
+    display: none;
+    margin-top: 10px;
+    font-size: var(--font-size-small);
+}
+.error-container span{
+    width: 100%;
+    color: indianred;
+}
+.error-container[active]{
+    display: block;
+}
+/*******************************/
+

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<title>관리자 페이지</title>
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<link rel="stylesheet" href="../../static/css/manager/manager.css?ver=1" type="text/css">
+	<script src="../../static/js/manager/manager1.js" defer></script>
+</head>
+
+<body>
+
+<nav class="nav-container">
+	<a class="notification">
+		<span id="notification-name">관리자용 페이지</span>
+	</a>
+</nav>
+
+<div class="ani-navbar">
+	<aside class="ani-navbar-menu" id="menu1">
+		<div class="menu-title">사용자 정보</div>
+	</aside>
+	<aside class="ani-navbar-menu" id="menu2">
+		<div class="menu-title">책 정보</div>
+	</aside>
+	<aside class="ani-navbar-menu" id="menu3">
+		<div class="menu-title">Q&A 리스트</div>
+	</aside>
+</div>
+
+<!-- 📌 사용자 정보 -->
+<div class="content" id="content1">
+	<h2>최신 회원 정보</h2>
+	<button type="button" class="delete-selected-btn" id="delete">삭제</button>
+
+	<table class="checklist1" border="1">
+		<thead>
+		<tr>
+			<th>아이디</th>
+			<th>전화번호</th>
+			<th>변경날짜</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody th:each="updateuser, iterStat : ${updatedUsers}">
+		<tr>
+			<td th:text="${updateuser.id}">User123</td>
+			<td th:text="${updateuser.tel}">닉네임 변경</td>
+			<td th:text="${updateuser.updatedAt}">2025-01-30</td>
+			<td><input type="checkbox"></td>
+		</tr>
+		</tbody>
+	</table>
+
+	<h2>회원 정보</h2>
+	<table class="checklist" border="1">
+		<thead>
+		<tr>
+			<th>닉네임</th>
+			<th>가입 날짜</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tbody th:each="user, iterStat : ${publicUsers}">
+		<tr>
+			<td th:text="${user.id}">NewUser456</td>
+			<td th:text="${user.joinDate}">2024-12-15</td>
+			<td><button class="promote-btn">승급</button></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- 📌 책 정보 -->
+<div class="content" id="content2">
+	<h2>책 정보</h2>
+	<table class="checklist2" border="1">
+		<thead>
+		<tr>
+			<th>책 제목</th>
+			<th>남은 권수</th>
+			<th>isbn</th>
+		</tr>
+		</thead>
+		<tbody th:each="book, iterStat : ${books}">
+		<tr>
+			<td th:text="${book.title}">해를 품은 달</td>
+			<td th:text="${book.copiesAvailable}">12권</td>
+			<td id="bookIsbn" th:text="${book.isbn}"></td>
+			<td><button class="book-delete-btn">삭제</button></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- 📌 Q&A 리스트 -->
+<div class="content" id="content3">
+	<h2>Q&A 리스트</h2>
+	<table class="checklist5">
+		<tbody>
+		<tr th:each="complain : ${complains}" th:if="${complain.answer == null}" th:data-complain-no="${complain.no}">
+			<td colspan="3">
+				<ul>
+					<li class="comment-trigger" th:text="${complain.userId}"></li>
+					<li class="comment-trigger" th:text="${complain.title}">문의 제목</li>
+					<li class="comment-trigger" th:text="${complain.contents}"></li>
+				</ul>
+				<div class="reply-box"></div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

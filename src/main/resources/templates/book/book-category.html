@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/main-layout}">
+<head>
+	<meta charset="UTF-8">
+	<title>책 목록</title>
+	<meta th:name="${_csrf.parameterName}" th:content="${_csrf.token}">
+	<link rel="stylesheet" href="../../static/css/book/book-category.css">
+	<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+	<script src="../../static/js/book/book-category.js" defer></script>
+</head>
+<body>
+<main layout:fragment="main">
+	<h1>책목록</h1>
+
+	<!-- 검색 섹션 -->
+	<section>
+		<form th:action="@{/book/search}" method="get">
+			<div class="book-title-search">
+				<span>책제목:</span>
+				<label>
+					<input type="text" id="search-input" class="search-input" placeholder="책 제목을 검색해주세요">
+					<button class="search-button" type="button"><i class="bi bi-search"></i></button>
+				</label>
+			</div>
+		</form>
+	</section>
+
+	<!-- 정렬 및 보기 설정 -->
+	<header>
+		<div>
+			<span>총: </span>
+			<b id="total-count" th:text="${pageInfo.totalElementCount}">0</b>
+			<span>건</span>
+		</div>
+		<ul>
+			<li>
+				<a th:href="@{/book/book-category(size=${pageInfo.size}, sort='recent')}">최신순</a>
+			</li>
+			<li>
+				<a th:href="@{/book/book-category(size=${pageInfo.size}, sort='title')}">제목순</a>
+			</li>
+			<li>
+				<label>
+					<span>보기설정</span>
+					<select id="view-size-select">
+						<option value="5" th:selected="${pageInfo.size == 5}">5개</option>
+						<option value="10" th:selected="${pageInfo.size == 10}">10개</option>
+						<option value="15" th:selected="${pageInfo.size == 15}">15개</option>
+					</select>
+				</label>
+			</li>
+		</ul>
+	</header>
+
+	<!-- 책 목록 섹션 -->
+	<section class="all-book">
+		<div class="one-book" th:each="book: ${pageInfo.elements}">
+			<div class="image-container">
+				<img th:src="${book.base64Image}" src="../../static/images/book_main.jpg" alt="메인이미지"/>
+			</div>
+			<div class="book-info">
+				<h2>
+					<a th:href="@{|/book/${book.isbn}|}" th:text="${book.title}">책 제목</a>
+				</h2>
+				<div class="author-publisher">
+					<span class="author" th:text="${book.author}">작가명</span>
+					<span>/</span>
+					<span class="publisher" th:text="${book.publisher}">출판사</span>
+				</div>
+				<!-- 책 가격을 hidden input으로 추가 -->
+				<input type="hidden" class="book-price-hidden" th:value="${book.price}">
+				<div class="rent-available">
+					<span>대출가능여부: </span>
+					<span th:text="${book.copiesAvailable} > 0 ? '가능' : '불가'" class="rent-status">불가</span>
+				</div>
+				<div class="plot">
+					<p th:text="${book.detail}">책의 줄거리나 설명</p>
+				</div>
+				<div class="rent-button-section">
+					<!-- 찜하기 버튼에 book 정보를 data 속성으로 전달 -->
+					<button class="book-heart-button"
+					        th:data-isbn="${book.isbn}"
+					        th:data-title="${book.title}">
+						찜하기
+					</button>
+					<button class="book-rent-button"
+					th:data-isbn="${book.isbn}" th:data-title="${book.title}"
+					th:data-price="${book.price}">대출하기</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 페이지네이션 -->
+	<ol class="pagination" th:if="${pageInfo.totalPageCount > 1}">
+		<!-- 이전 페이지 버튼 -->
+		<li th:if="${pageInfo.startPage > 1}">
+			<a th:href="@{/book/book-category(page=${pageInfo.startPage - 1}, size=${pageInfo.size}, sort=${pageInfo.sort})}">
+				<i class="bi bi-caret-left-fill"></i>
+			</a>
+		</li>
+
+		<!-- 페이지 번호 -->
+		<li th:each="pageNumber : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+			<a th:href="@{/book/book-category(page=${pageNumber}, size=${pageInfo.size}, sort=${pageInfo.sort})}"
+			   th:text="${pageNumber}"
+			   th:classappend="${pageInfo.page == pageNumber} ? 'active' : ''">
+			</a>
+		</li>
+
+		<!-- 다음 페이지 버튼 -->
+		<li th:if="${pageInfo.endPage < pageInfo.totalPageCount}">
+			<a th:href="@{/book/book-category(page=${pageInfo.endPage + 1}, size=${pageInfo.size}, sort=${pageInfo.sort})}">
+				<i class="bi bi-caret-right-fill"></i>
+			</a>
+		</li>
+	</ol>
+
+</main>
+</body>
+</html>

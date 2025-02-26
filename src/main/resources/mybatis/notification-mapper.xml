@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.NotificationMapper">
+    <!-- 알림 생성 -->
+    <insert id="createNotification">
+        INSERT INTO notification (id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, #{type})
+    </insert>
+    <!-- 알림을 읽었을 때 -->
+    <update id="updateNotificationStatus">
+        UPDATE notification
+        SET status = '읽음'
+        WHERE id = #{id}
+    </update>
+    <!-- 사용자 알림 조회 -->
+    <select id="getNotificationByUserId" resultType="NotificationDTO">
+        SELECT * FROM notification WHERE user_id = #{userId}
+        ORDER BY created_at DESC
+    </select>
+    <!-- 대출 기한 경고 알림 생성 -->
+    <insert id="createLoanReminderNotification">
+        INSERT INTO notification(id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, '대출 기한 경고')
+    </insert>
+    <!-- 포인트 획득 알림 생성 -->
+    <insert id="createPointEarnedNotification">
+        INSERT INTO notification(id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, '포인트 획득')
+    </insert>
+    <!-- 책 구매 완료 알림 생성 -->
+    <insert id="createPurchaseNotification">
+        INSERT INTO notification(id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, '책 구매 완료')
+    </insert>
+    <!-- 토론 알림 생성 -->
+    <insert id="createDiscussionNotification">
+        INSERT INTO notification(id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, '토론 알림')
+    </insert>
+    <!-- 회원가입 완료 알림 생성 -->
+    <insert id="createSignUpNotification">
+        INSERT INTO notification(id, message, created_at, status, user_id, type)
+        VALUES (NULL, #{message}, DEFAULT, '읽지 않음', #{userId}, '회원가입 완료')
+    </insert>
+
+</mapper>

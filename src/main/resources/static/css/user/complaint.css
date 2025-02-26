@@ -1,0 +1,67 @@
+@import url("../public/public.css");
+
+body {
+    position: relative;
+    margin: 15px auto;
+    text-align: center;
+}
+
+table h2{
+    text-align: center;
+    margin-right: -950px;
+}
+
+
+table {
+    margin: auto;
+    width:1500px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top: none;
+    text-align: center;
+}
+.header {
+    background-color: rgb(218, 231, 255);
+    text-align: center;
+}
+.table td, .table th {
+    border-bottom: 1px lightgray solid;
+    height: 30px;
+    font-size: 14px;
+}
+.num {
+    width: 50px;
+}
+.title {
+    width: 500px;
+}
+.body {
+    text-align: center;
+}
+.body .title {
+    text-align: left;
+}
+button {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    outline: 1.5px rgb(68, 136, 244) solid;
+    border-radius: 5px;
+    padding-left: 10px;
+    background-color: rgb(164, 199, 255);
+}
+button:active {
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    border: 0;
+    border-radius: 5px;
+    outline: 1.5px rgb(27, 76, 155) solid;
+    padding-left: 10px;
+    background-color: rgb(68, 136, 244);
+}
+
+#writeButtonContainer {
+    display: none;
+}

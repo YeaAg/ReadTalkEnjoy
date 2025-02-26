@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.DiscussionMapper">
+    <!-- 토론 주제 생성 -->
+    <insert id="createDiscussion" parameterType="DiscussionDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO discussion (
+            id, book_title, topic, contents, created_at, updated_at, user_id, book_isbn, book_image
+        )
+        VALUES (
+                   NULL,
+                   #{bookTitle},
+                   #{topic},
+                   #{contents},
+                   DEFAULT,
+                   DEFAULT,
+                   #{userId},
+                   (SELECT isbn FROM book WHERE REGEXP_REPLACE(title, '[^a-zA-Z0-9가-힣]', '') LIKE CONCAT('%', REGEXP_REPLACE(#{bookTitle}, '[^a-zA-Z0-9가-힣]', ''), '%') LIMIT 1),
+                   (SELECT image FROM book WHERE REGEXP_REPLACE(title, '[^a-zA-Z0-9가-힣]', '') LIKE CONCAT('%', REGEXP_REPLACE(#{bookTitle}, '[^a-zA-Z0-9가-힣]', ''), '%') LIMIT 1)
+               )
+    </insert>
+    <!-- 가장 최근에 남겨진 의견 -->
+    <select id="getRecentCommentByDiscussionId" resultType="string">
+        SELECT c.content
+        FROM discussion_comment c
+        WHERE c.discussion_id = #{discussionId}
+        ORDER BY c.created_at DESC
+        LIMIT 1
+    </select>
+    <!-- 특정 Discussion 에 대한 댓글 수 조회 -->
+    <select id="getCommentCountByDiscussion" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM discussion_comment
+        WHERE discussion_id = #{discussionId}
+    </select>
+    <!-- 가장 최근의 토론 주제 -->
+    <select id="getCurrentDiscussion" resultType="DiscussionDTO">
+        SELECT * FROM discussion
+        ORDER BY created_at DESC
+        LIMIT 1
+    </select>
+    <select id="selectPaginatedDiscussionsTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM discussion d
+    </select>
+    <!-- 토론의 모든 내용 반환 -->
+    <select id="getDiscussions" resultType="DiscussionDTO">
+        SELECT * FROM discussion d
+        <choose>
+            <!-- 최신순 정렬 -->
+            <when test="pageInfo.sort == 'recent'">
+                ORDER BY d.created_at DESC
+            </when>
+            <!-- 제목순 정렬 -->
+            <when test="pageInfo.sort == 'title'">
+                ORDER BY d.topic ASC
+            </when>
+        </choose>
+        LIMIT #{pageInfo.size} OFFSET #{pageInfo.offset}
+    </select>
+    <!-- Discussion 페이지 제목으로 토론, 조회된 개수 조회   -->
+    <select id="getDiscussionByBookTitle" resultType="DiscussionDTO">
+        SELECT
+        d.*,
+        (
+        SELECT dc.content
+        FROM discussion_comment dc
+        WHERE dc.discussion_id = d.id
+        ORDER BY dc.updated_at DESC
+        LIMIT 1
+        ) AS recentComment
+        FROM discussion d
+        WHERE REGEXP_REPLACE(d.book_title, '[^a-zA-Z0-9가-힣]', '')
+        LIKE CONCAT('%', REGEXP_REPLACE(#{title}, '[^a-zA-Z0-9가-힣]', ''), '%')
+        <choose>
+            <!-- 최신순 정렬 -->
+            <when test="pageInfo.sort == 'recent'">
+                ORDER BY d.created_at DESC
+            </when>
+            <!-- 제목순 정렬 -->
+            <when test="pageInfo.sort == 'title'">
+                ORDER BY d.topic ASC
+            </when>
+        </choose>
+        LIMIT #{pageInfo.size} OFFSET #{pageInfo.offset}
+    </select>
+    <!-- 토론 생성할 때 제목으로 이미지를 반환 -->
+    <select id="getBookImageByTitle">
+        SELECT image FROM book WHERE title LIKE CONCAT('%', REPLACE(#{title}, ' ', ''), '%')
+    </select>
+    <!-- 마이페이지, 내가 작성한 토론글 확인 -->
+    <select id="getMyDiscussion" resultType="DiscussionDTO">
+        SELECT * FROM discussion WHERE user_id = #{userId}
+    </select>
+    <!-- 각 discussion 조회 -->
+    <select id="selectDiscussionByDiscussionId" resultType="DiscussionDTO">
+        SELECT * FROM discussion WHERE id = #{discussionId}
+    </select>
+    <!-- 제목으로 검색된 토론의 수 반환 -->
+    <select id="getTotalCountByTitle" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM discussion
+        WHERE REGEXP_REPLACE(book_title, '[^a-zA-Z0-9가-힣]', '')
+                  LIKE CONCAT('%', REGEXP_REPLACE(#{title}, '[^a-zA-Z0-9가-힣]', ''), '%')
+    </select>
+    <!-- 사용자가 작성한 토론 글 -->
+    <select id="getTotalCountByUser" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM discussion WHERE user_id = #{userId}
+    </select>
+</mapper>
